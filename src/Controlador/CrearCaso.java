@@ -1,7 +1,6 @@
 
 package Controlador;
 
-//Hola mundo, por favor funciona :'V
 
 import java.awt.HeadlessException;
 import java.net.InetAddress;
