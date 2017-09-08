@@ -2251,7 +2251,7 @@ public Principal()
             int seleccion = jTableBusquedaCapturista.getSelectedRow();
             int IDNoExpediente = (int) jTableBusquedaCapturista.getValueAt(seleccion, 2);
             EliminarCasoDeLaBase(IDNoExpediente);
-                EliminarExpedienteCompleto(IDNoExpediente);
+            EliminarExpedienteCompleto(IDNoExpediente);
             }    
         }
     }//GEN-LAST:event_jBEliminarTodoActionPerformed

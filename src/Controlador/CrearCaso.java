@@ -1,6 +1,7 @@
 
 package Controlador;
 
+
 import java.awt.HeadlessException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -120,14 +121,13 @@ public class CrearCaso
         int IDEstatusExpediente = 2;
         InetAddress localHost = InetAddress.getLocalHost();
         String IP = localHost.getHostAddress();
-        String Mensaje = "Se creo el expediente " + NoExpediente + ", y se adjuntaron " + NombreArchivos.length + " archivo(s)";
+        String Mensaje = "Se creo el expediente, y se adjuntaron " + NombreArchivos.length + " archivo(s)";
         
         ConexionMySql mysql = new ConexionMySql();
         Connection cn = mysql.getConection();
         sSQL= "INSERT INTO bitacora(IDUsuario, IDNoExpediente, IDEstatusExpediente, FechaOrigen, HostOrigen, ActividadRealizada, IDActividadRealizada) VALUES (?, ?, ?, ?, ?, ?, ?)";        
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-
             pst.setInt(1, IDUsuario);
             pst.setInt(2, NoExpediente);
             pst.setInt(3, IDEstatusExpediente);
