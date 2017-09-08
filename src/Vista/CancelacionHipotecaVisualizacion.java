@@ -478,6 +478,7 @@ public class CancelacionHipotecaVisualizacion extends javax.swing.JFrame impleme
         jLApMaAcreditadoFisica = new javax.swing.JLabel();
         jLApPaAcreditanteFisica = new javax.swing.JLabel();
         tituloVentanaCancelacionHipoteca = new javax.swing.JLabel();
+        jBHabilitarEdicion = new javax.swing.JButton();
         jPPDF = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -759,6 +760,14 @@ public class CancelacionHipotecaVisualizacion extends javax.swing.JFrame impleme
         tituloVentanaCancelacionHipoteca.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tituloVentanaCancelacionHipoteca.setText("Cancelación Hipoteca");
 
+        jBHabilitarEdicion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Edit.png"))); // NOI18N
+        jBHabilitarEdicion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/EditPresionado.png"))); // NOI18N
+        jBHabilitarEdicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBHabilitarEdicionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
         PrincipalLayout.setHorizontalGroup(
@@ -853,6 +862,8 @@ public class CancelacionHipotecaVisualizacion extends javax.swing.JFrame impleme
                             .addGroup(PrincipalLayout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
                                 .addComponent(jLObservaciones)
@@ -939,7 +950,8 @@ public class CancelacionHipotecaVisualizacion extends javax.swing.JFrame impleme
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1196,6 +1208,15 @@ public class CancelacionHipotecaVisualizacion extends javax.swing.JFrame impleme
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jBHabilitarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarEdicionActionPerformed
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Seguro que quieres habilitar el poder actualizar este expediente? ",
+            "Habilitar actualizar sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+        {
+        jBTerminar.setVisible(true);
+        jBHabilitarEdicion.setVisible(false);
+        }
+    }//GEN-LAST:event_jBHabilitarEdicionActionPerformed
+
     /**
      * Main de la clase, inicia la ventana.
      * @param args
@@ -1219,7 +1240,8 @@ public class CancelacionHipotecaVisualizacion extends javax.swing.JFrame impleme
     private javax.swing.JButton jBAgregarAcreditante;
     private javax.swing.JButton jBEliminarAcreditado;
     private javax.swing.JButton jBEliminarAcreditante;
-    private javax.swing.JButton jBTerminar;
+    public javax.swing.JButton jBHabilitarEdicion;
+    public javax.swing.JButton jBTerminar;
     private javax.swing.JButton jButton1;
     public javax.swing.JLabel jLApMaAcreditadoFisica;
     public javax.swing.JLabel jLApMaAcreditanteFisica;

@@ -448,6 +448,7 @@ public class PoderesVisualizacion extends javax.swing.JFrame implements ActionLi
         jLApMaQuienRecibeFisica = new javax.swing.JLabel();
         jLApPaOtorganteFisica = new javax.swing.JLabel();
         tituloVentanaPoderes = new javax.swing.JLabel();
+        jBHabilitarEdicion = new javax.swing.JButton();
         jPPDF = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -729,6 +730,14 @@ public class PoderesVisualizacion extends javax.swing.JFrame implements ActionLi
         tituloVentanaPoderes.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tituloVentanaPoderes.setText("Poderes");
 
+        jBHabilitarEdicion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Edit.png"))); // NOI18N
+        jBHabilitarEdicion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/EditPresionado.png"))); // NOI18N
+        jBHabilitarEdicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBHabilitarEdicionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
         PrincipalLayout.setHorizontalGroup(
@@ -754,6 +763,8 @@ public class PoderesVisualizacion extends javax.swing.JFrame implements ActionLi
                             .addGroup(PrincipalLayout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
                                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -908,7 +919,8 @@ public class PoderesVisualizacion extends javax.swing.JFrame implements ActionLi
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1165,6 +1177,15 @@ public class PoderesVisualizacion extends javax.swing.JFrame implements ActionLi
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jBHabilitarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarEdicionActionPerformed
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Seguro que quieres habilitar el poder actualizar este expediente? ",
+            "Habilitar actualizar sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+    {
+        jBTerminar.setVisible(true);
+        jBHabilitarEdicion.setVisible(false);
+        }
+    }//GEN-LAST:event_jBHabilitarEdicionActionPerformed
+
     /**
      * Main de la clase, inicia la ventana.
      * @param args
@@ -1188,7 +1209,8 @@ public class PoderesVisualizacion extends javax.swing.JFrame implements ActionLi
     private javax.swing.JButton jBAgregarQuienRecibe;
     private javax.swing.JButton jBEliminarOtorgante;
     private javax.swing.JButton jBEliminarQuienRecibe;
-    private javax.swing.JButton jBTerminar;
+    public javax.swing.JButton jBHabilitarEdicion;
+    public javax.swing.JButton jBTerminar;
     private javax.swing.JButton jButton1;
     public javax.swing.JLabel jLApMaOtorganteFisica;
     public javax.swing.JLabel jLApMaQuienRecibeFisica;

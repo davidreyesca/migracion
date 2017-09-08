@@ -10,17 +10,17 @@ import javax.swing.JOptionPane;
 public class ConexionMySql
 {
     private static Connection conn;
-//    private static final String driver = "com.mysql.jdbc.Driver";
-//    private static final String bd = "migracion";
-//    private static final String user = "root";
-//    private static final String password = "";
-//    private static final String url = "jdbc:mysql://localhost:3306/" + bd;
-    
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String bd = "migraciondb";
-    private static final String user = "adminmigracion";
-    private static final String password = "Notaria21SLPassword";
-    private static final String url = "jdbc:mysql://160.153.59.37:3306/" + bd;
+    private static final String bd = "migracion";
+    private static final String user = "root";
+    private static final String password = "";
+    private static final String url = "jdbc:mysql://localhost:3306/" + bd;
+    
+//    private static final String driver = "com.mysql.jdbc.Driver";
+//    private static final String bd = "migraciondb";
+//    private static final String user = "adminmigracion";
+//    private static final String password = "Notaria21SLPassword";
+//    private static final String url = "jdbc:mysql://160.153.59.37:3306/" + bd;
     
     /**
      * Metodo encargado de la conexión

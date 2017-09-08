@@ -2,6 +2,8 @@ package Vista;
 
 import Controlador.BDdocumentos;
 import Controlador.CrearCaso;
+import Controlador.EliminarContenidoCarpetas;
+import Controlador.ValoresInicialesPrograma;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -20,8 +22,10 @@ public class EleccionTipoExpediente extends javax.swing.JFrame {
     {
         if (JOptionPane.showConfirmDialog(rootPane, "Si sales de PERDERA TODO el PROCESO",
                 "Salir del sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-        {
-             dispose();
+        {    
+                Principal.EliminarExpedienteCompleto(BDdocumentos.getNoExpediente());
+                EliminarContenidoCarpetas.iniciar(ValoresInicialesPrograma.getCarpetaArchivosLocal() + "\\" + BDdocumentos.getNoExpediente());
+                dispose();
         }
     }
     public EleccionTipoExpediente() 

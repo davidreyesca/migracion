@@ -83,14 +83,18 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
         jBVerPDF = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
+        jBSiguiente.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBSiguiente.setText("Siguiente");
+        jBSiguiente.setContentAreaFilled(false);
         jBSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSiguienteActionPerformed(evt);
             }
         });
 
+        jBAnterior.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBAnterior.setText("Anterior");
+        jBAnterior.setContentAreaFilled(false);
         jBAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAnteriorActionPerformed(evt);
@@ -112,23 +116,24 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPDFOpcionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                 .addComponent(jBAnterior)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBSiguiente)
-                .addGap(199, 199, 199))
+                .addGap(212, 212, 212))
         );
         jPPDFOpcionesLayout.setVerticalGroup(
             jPPDFOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPDFOpcionesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPPDFOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBAnterior)
-                    .addComponent(jBSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
             .addGroup(jPPDFOpcionesLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jBAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPPDFOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPPDFOpcionesLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jBAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPPDFOpcionesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPPDFOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBAnterior)
+                            .addComponent(jBSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -178,7 +183,7 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Agergar otro archivo");
+        jButton1.setText("Agregar otro archivo");
 
         javax.swing.GroupLayout jPDirectorioLayout = new javax.swing.GroupLayout(jPDirectorio);
         jPDirectorio.setLayout(jPDirectorioLayout);

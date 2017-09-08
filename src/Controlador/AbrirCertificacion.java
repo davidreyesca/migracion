@@ -23,9 +23,24 @@ public class AbrirCertificacion
     {
         ObtenerDatosGenerales();
         ObtenerDatosNombre();
+        EscondresEdicion();
         a.setVisible(true);
     }
-
+    public void EscondresEdicion()
+    {
+        if(AbrirExpediente.getEditar()==0)
+        {
+            //No se habilito la edicion
+            a.jBTerminar.setVisible(false);
+            a.jBHabilitarEdicion.setVisible(true);
+        }
+        else
+        {
+            a.jBTerminar.setVisible(true);
+            a.jBHabilitarEdicion.setVisible(false);
+        }
+    }
+    
     public void ObtenerDatosGenerales()
     {
         ConexionMySql mysql = new ConexionMySql();

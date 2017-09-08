@@ -329,6 +329,7 @@ public class TestamentosVisualizacion extends javax.swing.JFrame implements Acti
         tituloVentanaTestamentos = new javax.swing.JLabel();
         jLFolio = new javax.swing.JLabel();
         jTFolio = new javax.swing.JTextField();
+        jBHabilitarEdicion = new javax.swing.JButton();
         jPPDF = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -506,6 +507,9 @@ public class TestamentosVisualizacion extends javax.swing.JFrame implements Acti
 
         jTFolio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        jBHabilitarEdicion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Edit.png"))); // NOI18N
+        jBHabilitarEdicion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/EditPresionado.png"))); // NOI18N
+
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
         PrincipalLayout.setHorizontalGroup(
@@ -578,6 +582,8 @@ public class TestamentosVisualizacion extends javax.swing.JFrame implements Acti
                             .addGroup(PrincipalLayout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(23, 23, 23))))
         );
@@ -626,7 +632,8 @@ public class TestamentosVisualizacion extends javax.swing.JFrame implements Acti
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLObservaciones))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -795,7 +802,8 @@ public class TestamentosVisualizacion extends javax.swing.JFrame implements Acti
     private javax.swing.JPanel Principal;
     private javax.swing.JButton jBAgregarOtorgante;
     private javax.swing.JButton jBEliminarOtorgante;
-    private javax.swing.JButton jBTerminar;
+    public javax.swing.JButton jBHabilitarEdicion;
+    public javax.swing.JButton jBTerminar;
     private javax.swing.JButton jButton1;
     public javax.swing.JLabel jLApMaOtorganteFisica;
     public javax.swing.JLabel jLApPaOtorganteFisica;

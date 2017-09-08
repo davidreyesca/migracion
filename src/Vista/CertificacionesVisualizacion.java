@@ -295,6 +295,7 @@ public class CertificacionesVisualizacion extends javax.swing.JFrame implements 
         jButton1 = new javax.swing.JButton();
         jLApMaNombreFisica = new javax.swing.JLabel();
         tituloVentanaNombres = new javax.swing.JLabel();
+        jBHabilitarEdicion = new javax.swing.JButton();
         jPPDF = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -467,6 +468,14 @@ public class CertificacionesVisualizacion extends javax.swing.JFrame implements 
         tituloVentanaNombres.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tituloVentanaNombres.setText("Certificaciones");
 
+        jBHabilitarEdicion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Edit.png"))); // NOI18N
+        jBHabilitarEdicion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/EditPresionado.png"))); // NOI18N
+        jBHabilitarEdicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBHabilitarEdicionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
         PrincipalLayout.setHorizontalGroup(
@@ -534,6 +543,8 @@ public class CertificacionesVisualizacion extends javax.swing.JFrame implements 
                             .addGroup(PrincipalLayout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(23, 23, 23))))
         );
@@ -580,7 +591,8 @@ public class CertificacionesVisualizacion extends javax.swing.JFrame implements 
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -728,6 +740,15 @@ public class CertificacionesVisualizacion extends javax.swing.JFrame implements 
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jBHabilitarEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarEdicionActionPerformed
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Seguro que quieres habilitar el poder actualizar este expediente? ",
+            "Habilitar actualizar sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+    {
+        jBTerminar.setVisible(true);
+        jBHabilitarEdicion.setVisible(false);
+        }
+    }//GEN-LAST:event_jBHabilitarEdicionActionPerformed
+
     /**
      * Main de la clase, inicia la ventana.
      * @param args
@@ -748,7 +769,8 @@ public class CertificacionesVisualizacion extends javax.swing.JFrame implements 
     private javax.swing.JPanel Principal;
     private javax.swing.JButton jBAgregarNombre;
     private javax.swing.JButton jBEliminarNombre;
-    private javax.swing.JButton jBTerminar;
+    public javax.swing.JButton jBHabilitarEdicion;
+    public javax.swing.JButton jBTerminar;
     private javax.swing.JButton jButton1;
     public javax.swing.JLabel jLApMaNombreFisica;
     public javax.swing.JLabel jLApPaNombreFisica;

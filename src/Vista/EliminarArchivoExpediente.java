@@ -1,9 +1,17 @@
 package Vista;
 
+import Controlador.AbrirExpediente;
 import Controlador.ConexionMySql;
 import Controlador.EliminarArchivoExp;
 import Controlador.ImgTabla;
+import Controlador.ValoresInicialesPrograma;
+import java.awt.HeadlessException;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,7 +29,8 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
     DefaultTableModel modelo;
     int NoArchivosEncontrados=0;
 
-    public EliminarArchivoExpediente() {
+    public EliminarArchivoExpediente() 
+    {
         initComponents();
         propiedadesTabla();
         ConsultaArchivos();
@@ -285,10 +294,57 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Al menos debe existir un archivo en el expediente " + EliminarArchivoExp.getNoExpediente() + ", por lo cual no se puede borrar.");
         }else
         {
-            JOptionPane.showMessageDialog(null, "Comenzaremos a borrar el archivo");
+                int seleccion = jTDirecciones.getSelectedRow();
+                String ruta = (String) jTDirecciones.getValueAt(seleccion, 2);   
+                int NoExpediente = EliminarArchivoExp.getNoExpediente();
+                EliminarArchivoBaseDatos(NoExpediente, ruta);
+                ELiminarArchivosServer(ruta);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void EliminarArchivoBaseDatos(int NoExpediente, String Ruta)
+    {
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL= "DELETE FROM documentos WHERE IDNoExpediente = '" + NoExpediente + "' AND Ruta = '" + Ruta + "'";
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            int validacion = pst.executeUpdate();
+            if (validacion>0) {
+                System.out.println("Eliminado con exito!");  
+                mysql.desconectar();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Hubo un error al ACTUALIZAR los datos.");
+            }
+        } catch (HeadlessException | SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null, "ERROR! " + e);
+        }
+        LimpiarTabla();
+        ConsultaArchivos();
+    }
+    
+    private void ELiminarArchivosServer(String ruta)
+    {
+                try 
+                {
+                    InetAddress localHost = InetAddress.getLocalHost();
+                    String IPcliente = localHost.getHostAddress();
+                    System.out.println("Mi ip es: " + IPcliente);
+                    Socket misocket = new Socket(ValoresInicialesPrograma.getIPServidor(), 9998);
+                    DataOutputStream flujo_salida = new DataOutputStream(misocket.getOutputStream());
+                    //Lo que se envia como flujo
+                    flujo_salida.writeUTF(IPcliente + " archivo " + ruta);
+                    flujo_salida.close();
+                    misocket.close();
+                } catch (IOException ex)
+                {
+                    System.out.println("Error!" + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "El servidor esta fuera de linea, por favor comunicate con el administrador");
+                }
+    }
+    
     /**
      * @param args the command line arguments
      */

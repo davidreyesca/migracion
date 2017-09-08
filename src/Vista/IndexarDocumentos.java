@@ -23,10 +23,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 
-public final class IndexarDocumentos extends javax.swing.JFrame{
+public final class IndexarDocumentos extends javax.swing.JFrame implements Runnable{
     DefaultTableModel modelo;
     String[] URLs;
     String direccionFinal;
+    int pasar=0;
     //Carpeta donde queremos que se guarden los archivos temporales
     String direccion= ValoresInicialesPrograma.getCarpetaCopiaTemporalArchivos();
     
@@ -346,7 +347,7 @@ public final class IndexarDocumentos extends javax.swing.JFrame{
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ring.gif"))); // NOI18N
 
-        jInformacionActual.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jInformacionActual.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
         jInformacionActual.setText("Información...");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -357,26 +358,29 @@ public final class IndexarDocumentos extends javax.swing.JFrame{
         jPCargandoLayout.setHorizontalGroup(
             jPCargandoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCargandoLayout.createSequentialGroup()
-                .addGap(236, 236, 236)
-                .addComponent(jLabel2)
-                .addContainerGap(245, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCargandoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPCargandoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jInformacionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91))
+                    .addGroup(jPCargandoLayout.createSequentialGroup()
+                        .addGap(236, 236, 236)
+                        .addComponent(jLabel2))
+                    .addGroup(jPCargandoLayout.createSequentialGroup()
+                        .addGap(249, 249, 249)
+                        .addComponent(jLabel6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCargandoLayout.createSequentialGroup()
+                .addGap(0, 64, Short.MAX_VALUE)
+                .addComponent(jInformacionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         jPCargandoLayout.setVerticalGroup(
             jPCargandoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCargandoLayout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addGap(90, 90, 90)
                 .addComponent(jLabel6)
-                .addGap(42, 42, 42)
-                .addComponent(jInformacionActual)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jInformacionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel2)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         bg.add(jPCargando, "card3");
@@ -396,9 +400,22 @@ public final class IndexarDocumentos extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBIndexarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIndexarActionPerformed
+        try {
+            CambiarPaneles();
+        } catch (Exception ex) {
+            Logger.getLogger(IndexarDocumentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBIndexarActionPerformed
+    public void CambiarPaneles() throws Exception
+    {
             jPrincipal.setVisible(false);
             jPCargando.setVisible(true);
-            crearCarpetaTemporal();
+            Thread mihilo = new Thread(this);
+            mihilo.start();
+    }
+    public void Indexar()
+    {
+        crearCarpetaTemporal();
             try
             {                 
                 LecturaEscritura.Obtenerdatos(URLs);
@@ -406,10 +423,13 @@ public final class IndexarDocumentos extends javax.swing.JFrame{
             {
                 System.out.println("Error en metodo Obtener Datos");
             }
-         
-    }//GEN-LAST:event_jBIndexarActionPerformed
-
+    }
+    
     private void jBSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSeleccionarActionPerformed
+        SeleccionarArchivos();
+    }//GEN-LAST:event_jBSeleccionarActionPerformed
+    private void SeleccionarArchivos()
+    {
         LimpiarTabla();
         int contador=0;
         JFileChooser jf = new JFileChooser();
@@ -439,10 +459,23 @@ public final class IndexarDocumentos extends javax.swing.JFrame{
             System.out.println(URLs.length);
             for (String URL : URLs) {
                 System.out.println(URL);
+                if(VerificarEspaciosEnBlanco(URL)==true)
+                {
+                    JOptionPane.showMessageDialog(null, "El nombre del archivo NO PUEDE puede tener un ESPACIO en blanco.");
+                    SeleccionarArchivos();
+                }  
             }
         }
-    }//GEN-LAST:event_jBSeleccionarActionPerformed
-
+    }
+    private boolean VerificarEspaciosEnBlanco(String URL)
+    {
+        boolean espacio=false;
+        if(URL.indexOf(" ")!=-1 || URL.indexOf("    ")!=-1)
+        {
+             espacio=true;
+        }
+        return espacio;
+    }
     private int validarNoExpedienteExistente()
     {
          int resultado=0; 
@@ -543,4 +576,10 @@ public final class IndexarDocumentos extends javax.swing.JFrame{
     private javax.swing.JTable jTDirecciones;
     public static javax.swing.JTextField jTNoExpediente;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() 
+    {
+        Indexar();
+    }
 }

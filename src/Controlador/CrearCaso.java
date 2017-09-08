@@ -124,7 +124,7 @@ public class CrearCaso
         
         ConexionMySql mysql = new ConexionMySql();
         Connection cn = mysql.getConection();
-        sSQL= "INSERT INTO bitacora(IDUsuario, IDNoExpediente, IDEstatusExpediente, FechaOrigen, HostOrigen, ActividadRealizada) VALUES (?, ?, ?, ?, ?, ?)";        
+        sSQL= "INSERT INTO bitacora(IDUsuario, IDNoExpediente, IDEstatusExpediente, FechaOrigen, HostOrigen, ActividadRealizada, IDActividadRealizada) VALUES (?, ?, ?, ?, ?, ?, ?)";        
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
 
@@ -134,6 +134,7 @@ public class CrearCaso
             pst.setString(4, fechaAtcual());
             pst.setString(5, IP);
             pst.setString(6, Mensaje);
+            pst.setInt(7, 1);
             int validacion = pst.executeUpdate();
             if (validacion>0) 
             {
