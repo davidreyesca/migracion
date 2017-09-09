@@ -5,6 +5,7 @@ import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 
@@ -15,7 +16,8 @@ public class CapturaCompraVenta {
     }
     String tipoPersonaComprador, nombreFisicaComprador, apPaFisicaComprador, apMaFisicaComprador, nombreMoralComprador;
     String tipoPersonaVendedor, nombreFisicaVendedor, apPaFisicaVendedor, apMaFisicaVendedor, nombreMoralVendedor;
-    String fecha, tipoacto, calle, noexterior, nointerior, colonia, estado, municipio, observaciones;
+    String tipoacto, calle, noexterior, nointerior, colonia, estado, municipio, observaciones;
+    Date fecha;
     String sSQL="";
     int noExpediente= BDdocumentos.getNoExpediente();
     int IDCliente=1;
@@ -51,7 +53,7 @@ public class CapturaCompraVenta {
     {
         this.tomo = tomo;
     }
-    public void getFecha(String fecha)
+    public void getFecha(Date fecha)
     {
         this.fecha = fecha;
     }
@@ -108,7 +110,7 @@ public class CapturaCompraVenta {
             pst.setInt(3, folioReal);
             pst.setInt(4, instrumento);
             pst.setInt(5, tomo);
-            pst.setString(6, fecha);
+            pst.setDate(6, new java.sql.Date(fecha.getTime()));
             pst.setString(7, tipoacto);
             pst.setString(8, calle);
             pst.setString(9, noexterior);

@@ -8,8 +8,7 @@ import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 
@@ -58,15 +57,11 @@ public class CrearCaso
             mysql.desconectar();
         }
     }
-    public static String fechaAtcual()
-    {
-        Date fecha = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
-        return formatoFecha.format(fecha);
-    }
+
     
     public static void GuardarTablaDocumentos() 
     {   
+        Calendar cal = Calendar.getInstance();
         NombreArchivos=BDdocumentos.getNombresArchivos();
         URLsArchivos=BDdocumentos.getCarpetaServidor();
         ConexionMySql mysql = new ConexionMySql();
@@ -80,7 +75,7 @@ public class CrearCaso
                         
                                     pst.setInt(1, NoExpediente);
                                     pst.setString(2, NombreArchivos[i]);
-                                    pst.setString(3, fechaAtcual());
+                                    pst.setDate(3, new java.sql.Date(cal.getTimeInMillis()));
                                     pst.setString(4, URLsArchivos[i]);                                   
                                     int validacion = pst.executeUpdate();                                    
                                     if (validacion>0) 
@@ -116,6 +111,7 @@ public class CrearCaso
     
     public static void GuardarTablaBitacora() throws UnknownHostException 
     {
+        Calendar cal = Calendar.getInstance();
         int IDUsuario = DatosSesionIniciada.getIDUsuario();
         NoExpediente=BDdocumentos.getNoExpediente();
         int IDEstatusExpediente = 2;
@@ -131,7 +127,7 @@ public class CrearCaso
             pst.setInt(1, IDUsuario);
             pst.setInt(2, NoExpediente);
             pst.setInt(3, IDEstatusExpediente);
-            pst.setString(4, fechaAtcual());
+            pst.setDate(4, new java.sql.Date(cal.getTimeInMillis()));
             pst.setString(5, IP);
             pst.setString(6, Mensaje);
             pst.setInt(7, 1);

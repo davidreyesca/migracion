@@ -14,7 +14,8 @@ public class AbrirCompraVenta
     CompraVentaVisualizacion a = new CompraVentaVisualizacion();
     String tipoPersonaComprador, nombreComprador, apPaComprador, apMaComprador;
     String tipoPersonaVendedor, nombreVendedor, apPaVendedor, apMaVendedor;
-    String fecha, tipoacto, calle, noexterior, nointerior, colonia, estado, municipio, observaciones, TipoCompraventa;
+    String tipoacto, calle, noexterior, nointerior, colonia, estado, municipio, observaciones, TipoCompraventa;
+    Date fecha;
     String sSQL="";
     int noExpediente= AbrirExpediente.NoExpedinte;
     int IDCliente=1;
@@ -62,7 +63,7 @@ public class AbrirCompraVenta
                 folioReal = rs.getInt("FolioReal");
                 instrumento = rs.getInt("Instrumento");
                 tomo = rs.getInt("Tomo");
-                fecha = rs.getString("Fecha");
+                fecha = rs.getDate("Fecha");
                 tipoacto = rs.getString("TipoActo");
                 calle = rs.getString("Calle");
                 noexterior = rs.getString("NoExterior");
@@ -88,15 +89,15 @@ public class AbrirCompraVenta
         a.jTInstrumento.setText(String.valueOf(instrumento));
         a.jTTomo.setText(String.valueOf(tomo));
         a.jTTipoActo.setText(tipoacto);
-        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/mm/yyyy");
-        Date Fecha = null;
-        try 
-        {
-        Fecha = formatoDeFecha.parse(fecha);
-        } catch (ParseException ex)
-        {
-        }
-        a.jDCFecha.setDate(Fecha);
+//        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/mm/yyyy");
+//        Date Fecha = null;
+//        try 
+//        {
+//        Fecha = formatoDeFecha.parse(fecha);
+//        } catch (ParseException ex)
+//        {
+//        }
+        a.jDCFecha.setDate(fecha);
         a.jTCalle.setText(calle);
         a.jTNoExterior.setText(noexterior);
         a.jTNoInterior.setText(nointerior);

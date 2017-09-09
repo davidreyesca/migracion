@@ -4,6 +4,7 @@ import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +15,8 @@ public class DonacionActualizacion
 {
     String tipoPersonaDonatario, nombreFisicaDonatario, apPaFisicaDonatario, apMaFisicaDonatario, nombreMoralDonatario;
     String tipoPersonaDonante, nombreFisicaDonante, apPaFisicaDonante, apMaFisicaDonante, nombreMoralDonante;
-    String fecha, tipoacto, calle, noexterior, nointerior, colonia, estado, municipio, observaciones;
+    String tipoacto, calle, noexterior, nointerior, colonia, estado, municipio, observaciones;
+    Date fecha;
     String sSQL="";
     int noExpediente= AbrirExpediente.getNoExpedinte();
     int IDCliente=1;
@@ -47,7 +49,7 @@ public class DonacionActualizacion
     {
         this.tomo = tomo;
     }
-    public void getFecha(String fecha)
+    public void getFecha(Date fecha)
     {
         this.fecha = fecha;
     }
@@ -102,7 +104,7 @@ public class DonacionActualizacion
             pst.setInt(1, folioReal);
             pst.setInt(2, instrumento);
             pst.setInt(3, tomo);
-            pst.setString(4, fecha);
+            pst.setDate(4, new java.sql.Date(fecha.getTime()));
             pst.setString(5, tipoacto);
             pst.setString(6, calle);
             pst.setString(7, noexterior);

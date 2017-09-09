@@ -35,6 +35,7 @@ public class ValoresInicialesPrograma
     public static int getPuertoSalidaArchivosCompresos() {
         return PuertoSalidaArchivosCompresos;
     }
+
     public static String getIPServidor() {
         return IPServidor;
     }

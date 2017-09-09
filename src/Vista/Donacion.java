@@ -30,7 +30,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Donacion extends javax.swing.JFrame implements ActionListener{
     private int indiceDonatario;
     private int indiceDonante;
-    private DateFormat df = DateFormat.getDateInstance();
     private Map controlDonatarios = new HashMap();
     private Map controlDonantes = new HashMap();
     DefaultComboBoxModel modeloEstado, modeloMunicipio;
@@ -418,7 +417,7 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
             datos.getFolioReal(Integer.parseInt(jTFolioReal.getText()));
             datos.getInstrumento(Integer.parseInt(jTInstrumento.getText()));
             datos.getTomo(Integer.parseInt(jTTomo.getText()));
-            datos.getFecha(df.format(jDCFecha.getDate()));
+            datos.getFecha(jDCFecha.getDate());
             datos.getTipoActo(jTTipoActo.getText());           
             datos.getCalle(jTCalle.getText());
             datos.getNoExteriror(jTNoExterior.getText());

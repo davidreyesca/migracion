@@ -389,12 +389,6 @@ public Principal()
         jCFiltroUsuario = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLUsuarioFiltro = new javax.swing.JLabel();
-        jLDíaFiltro = new javax.swing.JLabel();
-        jCFiltroDia = new javax.swing.JComboBox<>();
-        jLMesFiltro = new javax.swing.JLabel();
-        jCMesFiltro = new javax.swing.JComboBox<>();
-        jLYearFiltro = new javax.swing.JLabel();
-        jCFiltroYear = new javax.swing.JComboBox<>();
         jLTipoExpedienteFiltro = new javax.swing.JLabel();
         jCFiltroTipoExpediente = new javax.swing.JComboBox<>();
         jPMiPerfil = new javax.swing.JPanel();
@@ -1418,37 +1412,7 @@ public Principal()
         jLabel15.setText("Filtros:");
 
         jLUsuarioFiltro.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
-        jLUsuarioFiltro.setText("Usuario");
-
-        jLDíaFiltro.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
-        jLDíaFiltro.setText("Día:");
-
-        jCFiltroDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCFiltroDia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCFiltroDiaActionPerformed(evt);
-            }
-        });
-
-        jLMesFiltro.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
-        jLMesFiltro.setText("Mes:");
-
-        jCMesFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCMesFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCMesFiltroActionPerformed(evt);
-            }
-        });
-
-        jLYearFiltro.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
-        jLYearFiltro.setText("Año:");
-
-        jCFiltroYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCFiltroYear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCFiltroYearActionPerformed(evt);
-            }
-        });
+        jLUsuarioFiltro.setText("Usuario:");
 
         jLTipoExpedienteFiltro.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
         jLTipoExpedienteFiltro.setText("Tipo de expediente:");
@@ -1472,7 +1436,7 @@ public Principal()
                         .addComponent(jBEliminarExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                         .addComponent(jButton21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBEditarTodos)
@@ -1483,25 +1447,13 @@ public Principal()
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPVerExpedientesLayout.createSequentialGroup()
                         .addComponent(jBRegresarDeVerExpedientes)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLUsuarioFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCFiltroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLDíaFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCFiltroDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLMesFiltro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCMesFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLYearFiltro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCFiltroYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLTipoExpedienteFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCFiltroTipoExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1511,20 +1463,14 @@ public Principal()
             jPVerExpedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPVerExpedientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPVerExpedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBRegresarDeVerExpedientes)
+                .addGroup(jPVerExpedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPVerExpedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
                         .addComponent(jLUsuarioFiltro)
                         .addComponent(jCFiltroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLDíaFiltro)
-                        .addComponent(jCFiltroDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLMesFiltro)
-                        .addComponent(jCMesFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLYearFiltro)
-                        .addComponent(jCFiltroYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLTipoExpedienteFiltro)
-                        .addComponent(jCFiltroTipoExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCFiltroTipoExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBRegresarDeVerExpedientes))
                 .addGap(13, 13, 13)
                 .addComponent(jLInstruccionesTodosExpedientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2379,18 +2325,6 @@ public Principal()
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jCFiltroDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFiltroDiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCFiltroDiaActionPerformed
-
-    private void jCMesFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCMesFiltroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCMesFiltroActionPerformed
-
-    private void jCFiltroYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFiltroYearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCFiltroYearActionPerformed
-
     private void jCFiltroTipoExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFiltroTipoExpedienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCFiltroTipoExpedienteActionPerformed
@@ -2525,14 +2459,9 @@ public Principal()
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jCBUsuariosDisponibles;
-    private javax.swing.JComboBox<String> jCFiltroDia;
     private javax.swing.JComboBox<String> jCFiltroTipoExpediente;
     private javax.swing.JComboBox<String> jCFiltroUsuario;
-    private javax.swing.JComboBox<String> jCFiltroYear;
-    private javax.swing.JComboBox<String> jCMesFiltro;
-    private javax.swing.JLabel jLDíaFiltro;
     private javax.swing.JLabel jLInstruccionesTodosExpedientes;
-    private javax.swing.JLabel jLMesFiltro;
     private javax.swing.JLabel jLPasswordActual;
     private javax.swing.JLabel jLPasswordConfirmacion;
     private javax.swing.JLabel jLPasswordNuevo;
@@ -2541,7 +2470,6 @@ public Principal()
     private javax.swing.JLabel jLTituloCambioPassword;
     private javax.swing.JLabel jLTituloPerfil;
     private javax.swing.JLabel jLUsuarioFiltro;
-    private javax.swing.JLabel jLYearFiltro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

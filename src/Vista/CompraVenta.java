@@ -34,7 +34,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class CompraVenta extends javax.swing.JFrame implements ActionListener{
     private int indiceComprador;
     private int indiceVendedor;
-    private DateFormat df = DateFormat.getDateInstance();
     private Map controlCompradores = new HashMap();
     private Map controlVendedores = new HashMap();
     DefaultComboBoxModel modeloEstado, modeloMunicipio;
@@ -451,7 +450,7 @@ public void llenar_combo()
             datos.getFolioReal(Integer.parseInt(jTFolioReal.getText()));
             datos.getInstrumento(Integer.parseInt(jTInstrumento.getText()));
             datos.getTomo(Integer.parseInt(jTTomo.getText()));
-            datos.getFecha(df.format(jDCFecha.getDate()));
+            datos.getFecha(jDCFecha.getDate());
             datos.getTipoActo(jTTipoActo.getText());           
             datos.getCalle(jTCalle.getText());
             datos.getNoExteriror(jTNoExterior.getText());
