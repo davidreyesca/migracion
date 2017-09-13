@@ -166,8 +166,8 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
         ValidarSolonumeros(jTInstrumento);
         ValidarSolonumeros(jTTomo);
         NoCaracteres(jTFolioReal, 11);
-        NoCaracteres(jTInstrumento, 30);
-        NoCaracteres(jTTomo, 30);
+        NoCaracteres(jTInstrumento, 11);
+        NoCaracteres(jTTomo, 11);
         NoCaracteres(jTTipoActo, 50);
         NoCaracteres(jTCalle, 50);
         NoCaracteres(jTNoExterior, 10);
@@ -415,6 +415,13 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
     {
         System.out.println("FELICITACIONES, Has pasado todas las validaciones!");
             datos.getFolioReal(Integer.parseInt(jTFolioReal.getText()));
+            if(jTFolioReal.getText().isEmpty())
+            {
+                datos.getFolioReal(0);
+            }else
+            {
+                datos.getFolioReal(Integer.parseInt(jTFolioReal.getText()));
+            }
             datos.getInstrumento(Integer.parseInt(jTInstrumento.getText()));
             datos.getTomo(Integer.parseInt(jTTomo.getText()));
             datos.getFecha(jDCFecha.getDate());

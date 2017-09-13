@@ -1,6 +1,5 @@
 package Vista;
 
-import Controlador.AbrirExpediente;
 import Controlador.ConexionMySql;
 import Controlador.EliminarArchivoExp;
 import Controlador.ImgTabla;
@@ -70,6 +69,7 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
     
     public void ConsultaArchivos()
     {
+        NoArchivosEncontrados=0;
         ConexionMySql mysql = new ConexionMySql();
         Connection cn = mysql.getConection();
         String sSQL="SELECT * FROM documentos WHERE IDNoExpediente=" + "'" + EliminarArchivoExp.getNoExpediente() +"'";
@@ -93,6 +93,7 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
         {
             mysql.desconectar();
         }
+        jLVistaExpediente.setText("No. total de archivos: " + NoArchivosEncontrados);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -299,6 +300,10 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
                 int NoExpediente = EliminarArchivoExp.getNoExpediente();
                 EliminarArchivoBaseDatos(NoExpediente, ruta);
                 ELiminarArchivosServer(ruta);
+                NoArchivosEncontrados=0;
+                LimpiarTabla();
+                ConsultaArchivos();
+                
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     private void EliminarArchivoBaseDatos(int NoExpediente, String Ruta)
@@ -321,8 +326,7 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "ERROR! " + e);
         }
-        LimpiarTabla();
-        ConsultaArchivos();
+        
     }
     
     private void ELiminarArchivosServer(String ruta)

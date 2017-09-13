@@ -194,8 +194,8 @@ public void llenar_combo()
         ValidarSolonumeros(jTInstrumento);
         ValidarSolonumeros(jTTomo);
         NoCaracteres(jTFolioReal, 11);
-        NoCaracteres(jTInstrumento, 30);
-        NoCaracteres(jTTomo, 30);
+        NoCaracteres(jTInstrumento, 11);
+        NoCaracteres(jTTomo, 11);
         NoCaracteres(jTTipoActo, 50);
         NoCaracteres(jTCalle, 50);
         NoCaracteres(jTNoExterior, 10);
@@ -447,7 +447,13 @@ public void llenar_combo()
     {
         System.out.println("FELICITACIONES, Has pasado todas las validaciones!");
             datos.getIDTipoCompraventa(ObtenerNoTipoCompraVenta());
-            datos.getFolioReal(Integer.parseInt(jTFolioReal.getText()));
+            if(jTFolioReal.getText().isEmpty())
+            {
+                datos.getFolioReal(0);
+            }else
+            {
+                datos.getFolioReal(Integer.parseInt(jTFolioReal.getText()));
+            }
             datos.getInstrumento(Integer.parseInt(jTInstrumento.getText()));
             datos.getTomo(Integer.parseInt(jTTomo.getText()));
             datos.getFecha(jDCFecha.getDate());

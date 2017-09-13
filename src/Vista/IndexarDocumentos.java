@@ -79,7 +79,7 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
         }
     }
     private void ValidarSolonumeros(JTextField a)
-    {   
+    {
         a.addKeyListener(new KeyAdapter() {
         public void keyTyped(KeyEvent e)
         {
@@ -91,6 +91,15 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
         }
         });       
     }
+    private String ValidarSoloNumerosFinal(JTextField a)
+    {
+            String cambio;
+            String nuestrotexto = a.getText();
+            cambio = nuestrotexto.replaceAll("[^0-9]", "");
+            nuestrotexto = cambio;
+            a.setText(nuestrotexto);
+            return nuestrotexto;
+    }
     private void SNumeros(JTextField a)
     {
         a.addKeyListener(new KeyAdapter() {
@@ -98,6 +107,21 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
         {
             char c=e.getKeyChar();
             if(Character.isLetter(c))
+            {
+                getToolkit().beep();
+                e.consume();
+            }
+        }
+        });
+    }
+    private void ValidarEspacios(JTextField a)
+    {
+       a.addKeyListener(new KeyAdapter() {
+        public void keyTyped(KeyEvent e)
+        {
+            char c=e.getKeyChar();
+            char c2= KeyEvent.VK_SPACE;
+            if( c == c2)
             {
                 getToolkit().beep();
                 e.consume();
@@ -123,6 +147,7 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
         ocultarPaneles();
         ValidarSolonumeros(jTNoExpediente);
         SNumeros(jTNoExpediente);
+        ValidarEspacios(jTNoExpediente);
     }
 
     @SuppressWarnings("unchecked")
@@ -184,8 +209,8 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
         jBValidar.setBackground(new java.awt.Color(41, 168, 73));
         jBValidar.setForeground(new java.awt.Color(255, 255, 255));
         jBValidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Validar.png"))); // NOI18N
-        jBValidar.setBorder(null);
         jBValidar.setBorderPainted(false);
+        jBValidar.setContentAreaFilled(false);
         jBValidar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ValidarApretado.png"))); // NOI18N
         jBValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,12 +240,12 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPNoExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBValidar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPNoExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPNoExpedienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTNoExpediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)))
-                .addContainerGap())
+                        .addComponent(jLabel3))
+                    .addComponent(jBValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPDirecciones.setBackground(new java.awt.Color(255, 255, 255));
@@ -241,7 +266,8 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
         jLabel5.setText("Selecciona los archivos a indexar.");
 
         jBSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Seleccionar.png"))); // NOI18N
-        jBSeleccionar.setBorder(null);
+        jBSeleccionar.setBorderPainted(false);
+        jBSeleccionar.setContentAreaFilled(false);
         jBSeleccionar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/SeleccionarApretado.png"))); // NOI18N
         jBSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +283,7 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBSeleccionar)
+                .addComponent(jBSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -265,10 +291,10 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
             jPDireccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPDireccionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPDireccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPDireccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jBSeleccionar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jBSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -380,7 +406,7 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
                 .addComponent(jInformacionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(jLabel2)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         bg.add(jPCargando, "card3");
@@ -456,8 +482,8 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
                 URLs[contador2] = item.getAbsolutePath().toString();
                 contador2++;
             }
-            System.out.println(URLs.length);
-            for (String URL : URLs) {
+            for (String URL : URLs) 
+            {
                 System.out.println(URL);
                 if(VerificarEspaciosEnBlanco(URL)==true)
                 {
@@ -508,10 +534,12 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
         }else if(validarNoExpedienteExistente()==1)
         {
             JOptionPane.showMessageDialog(null, "Ya existe este Expediente, intenta con otro!");
+            jTNoExpediente.setText("");
+            jTNoExpediente.requestFocus();
         }else
         {
-            BDdocumentos.setNoExpediente(Integer.parseInt(jTNoExpediente.getText()));
-            System.out.println("Enviando el No. Expediente: " + Integer.parseInt(jTNoExpediente.getText()));
+            BDdocumentos.setNoExpediente(Integer.parseInt(ValidarSoloNumerosFinal(jTNoExpediente)));
+            System.out.println("Enviando el No. Expediente: " + Integer.parseInt(ValidarSoloNumerosFinal(jTNoExpediente)));
             jTNoExpediente.setEditable(false);
             jTNoExpediente.setEnabled(false); 
             jBValidar.setEnabled(false);
