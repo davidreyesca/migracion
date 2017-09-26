@@ -1487,6 +1487,11 @@ public Principal()
 
         jCFiltroUsuario.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jCFiltroUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCFiltroUsuario.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCFiltroUsuarioItemStateChanged(evt);
+            }
+        });
 
         jCFiltroTipoExpediente.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jCFiltroTipoExpediente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -2458,6 +2463,10 @@ public Principal()
         String cambiar = (String) jTTiposCompraVenta.getValueAt(seleccion, 0);
         jTEditarTipoCompraVenta.setText(cambiar);
     }//GEN-LAST:event_jTTiposCompraVentaMouseClicked
+
+    private void jCFiltroUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCFiltroUsuarioItemStateChanged
+        
+    }//GEN-LAST:event_jCFiltroUsuarioItemStateChanged
     public static void ActualizarListaUsuarios()
     {
         for (int i = 0; i < jTUsuarios.getRowCount(); i++) 

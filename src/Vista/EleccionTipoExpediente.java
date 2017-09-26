@@ -31,6 +31,7 @@ public class EleccionTipoExpediente extends javax.swing.JFrame {
     public EleccionTipoExpediente() 
     {
         setLocationRelativeTo(null);
+        setAlwaysOnTop(true);
         setResizable(false);
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("Imagenes/IconoNotaria.png")).getImage());

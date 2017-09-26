@@ -10,7 +10,9 @@ import java.awt.HeadlessException;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -316,15 +318,49 @@ public class AgregarNuevoArchivo extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jIndexarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIndexarActionPerformed
-        try {
-            //Variable que necesito enviar es ruta
-            CopiarLocalArchivo.crearCarpetaTemporalEnvio(ruta);
-            dispose();
-        } catch (Exception ex) {
-            Logger.getLogger(AgregarNuevoArchivo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if(ValidarBD() == true)
+        {
+            JOptionPane.showMessageDialog(null, "Ya existe un archivo con ese mismo nombre es ese expediente.");
+            SeleccionarArchivos();
+        }else
+        {
+            try 
+            {
+                //Variable que necesito enviar es ruta
+                CopiarLocalArchivo.crearCarpetaTemporalEnvio(ruta);
+                dispose();
+            } catch (Exception ex) {
+                Logger.getLogger(AgregarNuevoArchivo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }  
     }//GEN-LAST:event_jIndexarActionPerformed
 
+    public boolean ValidarBD()
+    {
+        boolean validado = false;
+        int Expediente = AgregarArchivoExp.getNoExpediente();
+        archivo = new File(ruta);
+        nombre = archivo.getName();
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL="SELECT * FROM documentos WHERE IDNoExpediente='" + Expediente + "' and NombreArchivo='" + nombre + "'";
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL); 
+            if(rs.next()) 
+            {    
+                validado = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al contectar la base de datos" + ex);
+        }finally
+        {
+            mysql.desconectar();
+        }
+        return validado;
+    }
+    
     public static void AgregarABD(boolean realizado)
     {
         archivo = new File(ruta);

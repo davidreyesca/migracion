@@ -188,6 +188,11 @@ public class VistaPrevia extends javax.swing.JPanel {
         });
 
         jButton2.setText("Agregar un archivo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPDirectorioLayout = new javax.swing.GroupLayout(jPDirectorio);
         jPDirectorio.setLayout(jPDirectorioLayout);
@@ -421,6 +426,11 @@ public class VistaPrevia extends javax.swing.JPanel {
         EliminarArchivoExp a = new EliminarArchivoExp();
         a.AbrirEliminadorArchivos(NoExpediente);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        AgregarArchivoExp b = new AgregarArchivoExp();
+        b.AbrirAgregarArchivos(NoExpediente);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

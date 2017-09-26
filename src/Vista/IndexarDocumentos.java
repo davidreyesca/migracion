@@ -132,6 +132,7 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
     public IndexarDocumentos() 
     {
         initComponents();
+        setAlwaysOnTop(true);
         setIconImage(new ImageIcon(getClass().getResource("Imagenes/IconoNotaria.png")).getImage());
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
