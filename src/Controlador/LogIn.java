@@ -50,16 +50,23 @@ public class LogIn
      */
     public int InicioSesion()
     {          
+        String usuario="";
+        String contra="";
         ConexionMySql mysql = new ConexionMySql();
         Connection cn = mysql.getConection();
-        String sSQL="SELECT * FROM usuarios WHERE NombreUsuario='" + this.Usuario + "' AND Password='" + this.Password +"'";
+        String sSQL="SELECT * FROM usuarios WHERE NombreUsuario='" + this.Usuario + "'";
         try 
         {
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sSQL);
-            if (rs.next()) 
+            ResultSet rs = st.executeQuery(sSQL); 
+            while(rs.next()) 
+            {    
+                usuario = rs.getString("NombreUsuario");
+                contra = rs.getString("Password");
+            }
+            if(this.Usuario.equals(usuario) && this.Password.equals(contra)) 
             {
-               resultado=1;
+                resultado=1;
             }
         } catch (SQLException ex) {
             System.out.println("Error al contectar la base de datos" + ex);

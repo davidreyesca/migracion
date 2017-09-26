@@ -8,9 +8,9 @@ import java.io.File;
 
 public class ValoresInicialesPrograma 
 {
-    final static private String CarpetaArchivosLocal = "C:\\Users\\Pc\\Documents\\EBPConsultores\\Temporales";
-    final static private String CarpetaArchivosLocalCompresos = "C:\\Users\\Pc\\Documents\\EBPConsultores\\Enviar";
-    final static private String CarpetaArchivosLocalLectura = "C:\\Users\\Pc\\Documents\\EBPConsultores\\Lectura";
+    final static private String CarpetaArchivosLocal = "C:\\EBPConsultores\\Temporales";
+    final static private String CarpetaArchivosLocalCompresos = "C:\\EBPConsultores\\Enviar";
+    final static private String CarpetaArchivosLocalLectura = "C:\\EBPConsultores\\Lectura";
     final static File folderLocal = new File(CarpetaArchivosLocal);
     final static File folderLocalCompresos = new File(CarpetaArchivosLocalCompresos);
     final static File folderLocalLectura = new File(CarpetaArchivosLocalLectura);
@@ -31,7 +31,7 @@ public class ValoresInicialesPrograma
     /**
      * Getters publicos del sistema.
      * @return CarpetaArchivosServidor
-     */
+     */    
     public static int getPuertoSalidaArchivosCompresos() {
         return PuertoSalidaArchivosCompresos;
     }

@@ -224,23 +224,24 @@ public class UsuarioNuevo extends javax.swing.JFrame
 
         jLNotaria.setFont(new java.awt.Font("Leelawadee", 0, 14)); // NOI18N
         jLNotaria.setForeground(new java.awt.Color(255, 255, 255));
-        jLNotaria.setText("Notaría 21 San Luis Potosí");
+        jLNotaria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Logo21blanco.png"))); // NOI18N
+        jLNotaria.setText(" Notaría");
 
         javax.swing.GroupLayout VistaLayout = new javax.swing.GroupLayout(Vista);
         Vista.setLayout(VistaLayout);
         VistaLayout.setHorizontalGroup(
             VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VistaLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLTitulo1)
-                    .addComponent(jLTitulo2)
-                    .addComponent(jLNotaria, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VistaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Icono)
                 .addGap(55, 55, 55))
+            .addGroup(VistaLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLNotaria)
+                    .addComponent(jLTitulo1)
+                    .addComponent(jLTitulo2))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         VistaLayout.setVerticalGroup(
             VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -572,7 +572,8 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
+                public void run() 
+                {
                     new IndexarDocumentos().setVisible(true);
                 }
             });

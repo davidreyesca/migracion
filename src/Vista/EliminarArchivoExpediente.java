@@ -34,7 +34,7 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
         propiedadesTabla();
         ConsultaArchivos();
         jLVistaExpediente.setText("No. total de archivos: " + NoArchivosEncontrados);
-        jLTitulo.setText(" Archivos actuales del expediente " + EliminarArchivoExp.getNoExpediente());
+        jLTitulo.setText(" No. de expediente " + EliminarArchivoExp.getNoExpediente());
         setIconImage(new ImageIcon(getClass().getResource("Imagenes/IconoNotaria.png")).getImage());
         setLocationRelativeTo(null);
         setResizable(false);
@@ -44,24 +44,24 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
     {
         String cabecera[]= {"Tipo", "Nombre archivo","Ruta"};
         String datos[][]={};
-        jTDirecciones.setDefaultRenderer(Object.class,new ImgTabla());
+        jAgregarArchivo.setDefaultRenderer(Object.class,new ImgTabla());
         modelo= new DefaultTableModel(datos, cabecera)
         {
             public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
         };
-        jTDirecciones.setModel(modelo);
-        jTDirecciones.setRowHeight(30);
-        jTDirecciones.getColumnModel().getColumn(0).setMaxWidth(50);
-        jTDirecciones.getColumnModel().getColumn(0).setMaxWidth(50);
-        jTDirecciones.getColumnModel().getColumn(2).setMaxWidth(0);
-        jTDirecciones.getColumnModel().getColumn(2).setMinWidth(0);
-        jTDirecciones.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
-        jTDirecciones.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+        jAgregarArchivo.setModel(modelo);
+        jAgregarArchivo.setRowHeight(30);
+        jAgregarArchivo.getColumnModel().getColumn(0).setMaxWidth(50);
+        jAgregarArchivo.getColumnModel().getColumn(0).setMaxWidth(50);
+        jAgregarArchivo.getColumnModel().getColumn(2).setMaxWidth(0);
+        jAgregarArchivo.getColumnModel().getColumn(2).setMinWidth(0);
+        jAgregarArchivo.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+        jAgregarArchivo.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
    }
     
     private void LimpiarTabla()
     {
-       for (int i = 0; i < jTDirecciones.getRowCount(); i++) {
+       for (int i = 0; i < jAgregarArchivo.getRowCount(); i++) {
            modelo.removeRow(i);
            i-=1;
        }
@@ -107,7 +107,7 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
         jLNotaria = new javax.swing.JLabel();
         Principal = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTDirecciones = new javax.swing.JTable();
+        jAgregarArchivo = new javax.swing.JTable();
         jLTitulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -171,7 +171,7 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
 
         Principal.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTDirecciones.setModel(new javax.swing.table.DefaultTableModel(
+        jAgregarArchivo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -182,16 +182,16 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTDirecciones.setSelectionBackground(new java.awt.Color(41, 168, 73));
-        jTDirecciones.setShowVerticalLines(false);
-        jTDirecciones.addMouseListener(new java.awt.event.MouseAdapter() {
+        jAgregarArchivo.setSelectionBackground(new java.awt.Color(41, 168, 73));
+        jAgregarArchivo.setShowVerticalLines(false);
+        jAgregarArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTDireccionesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTDirecciones);
+        jScrollPane1.setViewportView(jAgregarArchivo);
 
-        jLTitulo.setFont(new java.awt.Font("Leelawadee", 1, 24)); // NOI18N
+        jLTitulo.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
         jLTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/files.png"))); // NOI18N
         jLTitulo.setText(" Archivos actuales del expediente ");
 
@@ -238,11 +238,11 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
             .addGroup(PrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLTitulo)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -287,7 +287,7 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jTDirecciones.getSelectedRow()==-1)
+        if(jAgregarArchivo.getSelectedRow()==-1)
         {
             JOptionPane.showMessageDialog(null, "Necesitas seleccionar uno de los archivos para eliminarlo");
         }else if(NoArchivosEncontrados<=1)
@@ -295,8 +295,8 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Al menos debe existir un archivo en el expediente " + EliminarArchivoExp.getNoExpediente() + ", por lo cual no se puede borrar.");
         }else
         {
-                int seleccion = jTDirecciones.getSelectedRow();
-                String ruta = (String) jTDirecciones.getValueAt(seleccion, 2);   
+                int seleccion = jAgregarArchivo.getSelectedRow();
+                String ruta = (String) jAgregarArchivo.getValueAt(seleccion, 2);   
                 int NoExpediente = EliminarArchivoExp.getNoExpediente();
                 EliminarArchivoBaseDatos(NoExpediente, ruta);
                 ELiminarArchivosServer(ruta);
@@ -398,7 +398,7 @@ public class EliminarArchivoExpediente extends javax.swing.JFrame {
     private javax.swing.JLabel jLVistaExpediente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTDirecciones;
+    public static javax.swing.JTable jAgregarArchivo;
     // End of variables declaration//GEN-END:variables
 
 }

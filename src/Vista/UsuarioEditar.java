@@ -227,28 +227,24 @@ public class UsuarioEditar extends javax.swing.JFrame
 
         jLNotaria.setFont(new java.awt.Font("Leelawadee", 0, 14)); // NOI18N
         jLNotaria.setForeground(new java.awt.Color(255, 255, 255));
-        jLNotaria.setText("Notaría 21 San Luis Potosí");
+        jLNotaria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/Logo21blanco.png"))); // NOI18N
+        jLNotaria.setText(" Notaría");
 
         javax.swing.GroupLayout VistaLayout = new javax.swing.GroupLayout(Vista);
         Vista.setLayout(VistaLayout);
         VistaLayout.setHorizontalGroup(
             VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VistaLayout.createSequentialGroup()
-                .addGroup(VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VistaLayout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jLNotaria))
-                    .addGroup(VistaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLTitulo1))
-                    .addGroup(VistaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLTitulo2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VistaLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(Icono)
                 .addGap(79, 79, 79))
+            .addGroup(VistaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLTitulo1)
+                    .addComponent(jLTitulo2)
+                    .addComponent(jLNotaria))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         VistaLayout.setVerticalGroup(
             VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -25,11 +25,8 @@ public class ComprimirDirectorio
         IndexarDocumentos.jInformacionActual.setText("Compresión finalizada...");
         System.out.println("Carpeta comprimida");
         ClienteIndexar.copiarAlServidor();
-        
-        
         //Aquí se tiene que eliminar lo que hay en la carpeta de temporal
-        
-        
+
     }
     
     static void comprimir_carpeta(String origen, String destino) throws Exception 

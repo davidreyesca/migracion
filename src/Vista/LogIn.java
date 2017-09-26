@@ -80,6 +80,7 @@ public class LogIn extends javax.swing.JFrame {
         jTUsuario.setForeground(new java.awt.Color(102, 102, 102));
         jTUsuario.setText("Nombre de usuario");
         jTUsuario.setBorder(null);
+        jTUsuario.setSelectionColor(new java.awt.Color(41, 168, 73));
         jTUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTUsuarioFocusGained(evt);
@@ -104,6 +105,7 @@ public class LogIn extends javax.swing.JFrame {
         jTpassword.setForeground(new java.awt.Color(102, 102, 102));
         jTpassword.setText("contraseña");
         jTpassword.setBorder(null);
+        jTpassword.setSelectionColor(new java.awt.Color(41, 168, 73));
         jTpassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTpasswordFocusGained(evt);
@@ -146,7 +148,7 @@ public class LogIn extends javax.swing.JFrame {
         jLOlvidarPassword2.setForeground(new java.awt.Color(51, 51, 51));
         jLOlvidarPassword2.setText("Contraseña:");
 
-        jPanel2.setBackground(new java.awt.Color(49, 58, 115));
+        jPanel2.setBackground(new java.awt.Color(18, 71, 143));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -232,9 +234,9 @@ public class LogIn extends javax.swing.JFrame {
         jLIniciando.setForeground(new java.awt.Color(41, 168, 73));
         jLIniciando.setText("Iniciando sesión...");
 
-        jLabel1.setText("Desarollado por...");
+        jLabel1.setText("Desarrollado por...");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/EBPConsultores Logo Final_min.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/EBPLogIn.png"))); // NOI18N
 
         javax.swing.GroupLayout loaderLayout = new javax.swing.GroupLayout(loader);
         loader.setLayout(loaderLayout);
@@ -252,7 +254,7 @@ public class LogIn extends javax.swing.JFrame {
                             .addGroup(loaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2)))))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         loaderLayout.setVerticalGroup(
             loaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +263,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(img_loader, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(jLIniciando)

@@ -17,7 +17,7 @@ public class ClienteIndexar {
         ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
         FileInputStream file = new FileInputStream(ValoresInicialesPrograma.getFicheroZipLocal());
         byte[] buf = new byte[4096];
-        while (true) 
+        while (true)
         {
             int len = file.read(buf);
             if (len==-1) 
