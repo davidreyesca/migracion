@@ -10,7 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.text.DateFormat;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -30,6 +33,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Donacion extends javax.swing.JFrame implements ActionListener{
     private int indiceDonatario;
     private int indiceDonante;
+    int NoEx;
     private Map controlDonatarios = new HashMap();
     private Map controlDonantes = new HashMap();
     DefaultComboBoxModel modeloEstado, modeloMunicipio;
@@ -455,6 +459,13 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
              dispose();
         }
     }
+    public void OcultarValidoInvalido()
+    {
+        jInvalido.setVisible(true);
+        jValido.setVisible(false);
+        JIntrumentoInformacion.setText("El campo instrumento no puede ir vacio.");
+        jBTerminar.setEnabled(false);
+    }
     /**
      * Constructor de la clase
      */
@@ -469,6 +480,7 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
                 close();  
             }
         });
+        OcultarValidoInvalido();
         setIconImage(new ImageIcon(getClass().getResource("Imagenes/IconoNotaria.png")).getImage());
         setExtendedState(MAXIMIZED_BOTH);
         tituloVentanaNoExpedienteDonacion.setText("No. Expediente: #" + BDdocumentos.getNoExpediente());
@@ -549,6 +561,9 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
         jDCFecha = new com.toedter.calendar.JDateChooser();
         tituloVentanaDonacion = new javax.swing.JLabel();
         jBCambiarTipo = new javax.swing.JButton();
+        jInvalido = new javax.swing.JLabel();
+        jValido = new javax.swing.JLabel();
+        JIntrumentoInformacion = new javax.swing.JLabel();
         jPPDF = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -812,6 +827,11 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
 
         jTInstrumento.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTInstrumento.setPreferredSize(new java.awt.Dimension(250, 26));
+        jTInstrumento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTInstrumentoFocusLost(evt);
+            }
+        });
         jTInstrumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTInstrumentoActionPerformed(evt);
@@ -952,6 +972,13 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
             }
         });
 
+        jInvalido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ocupado.png"))); // NOI18N
+
+        jValido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/validacion.png"))); // NOI18N
+
+        JIntrumentoInformacion.setFont(new java.awt.Font("Leelawadee", 0, 14)); // NOI18N
+        JIntrumentoInformacion.setText("El campo instrumento no puede estar vacio.");
+
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
         PrincipalLayout.setHorizontalGroup(
@@ -971,59 +998,6 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
                                 .addComponent(jBAgregarDonatario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBEliminarDonatario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
-                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PrincipalLayout.createSequentialGroup()
-                                        .addGap(303, 303, 303)
-                                        .addComponent(jRBFisicaDonatario)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jRBMoralDonatario))
-                                    .addGroup(PrincipalLayout.createSequentialGroup()
-                                        .addGap(410, 410, 410)
-                                        .addComponent(jLTituloDonante))
-                                    .addGroup(PrincipalLayout.createSequentialGroup()
-                                        .addGap(305, 305, 305)
-                                        .addComponent(jRBFisicaDonante)
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jRBMoralDonante))
-                                    .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(PrincipalLayout.createSequentialGroup()
-                                            .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLInstrumento)
-                                                .addComponent(jLFolioReal)
-                                                .addComponent(jLTomo)
-                                                .addComponent(jLTipoActo)
-                                                .addComponent(jLColonia)
-                                                .addComponent(jLObservaciones))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(PrincipalLayout.createSequentialGroup()
-                                                    .addComponent(jTColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jLEstadoRepublica)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jCBEstadoRepublica, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jLMunicipio)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jCBMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(PrincipalLayout.createSequentialGroup()
-                                                    .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                            .addComponent(jTInstrumento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(jTFolioReal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jLFecha2)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(jScrollPane1))))
-                                    .addGroup(PrincipalLayout.createSequentialGroup()
-                                        .addGap(401, 401, 401)
-                                        .addComponent(jLTituloDonatario)))
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(PrincipalLayout.createSequentialGroup()
                                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(PrincipalLayout.createSequentialGroup()
@@ -1032,23 +1006,7 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
                                         .addComponent(jBEliminarDonante, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(PrincipalLayout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
-                                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
-                                                .addComponent(jLCalle)
-                                                .addGap(72, 72, 72)
-                                                .addComponent(jTCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLNoExterior)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTNoExterior, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLNoInterior)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTNoInterior, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(3, 3, 3))
                             .addGroup(PrincipalLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
@@ -1097,8 +1055,90 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLApMaDonatarioFisica)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTApMaDonatarioFisica)))))))
-                        .addGap(31, 31, 31))))
+                                                .addComponent(jTApMaDonatarioFisica))))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
+                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
+                                        .addGap(303, 303, 303)
+                                        .addComponent(jRBFisicaDonatario)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jRBMoralDonatario))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
+                                        .addGap(410, 410, 410)
+                                        .addComponent(jLTituloDonante))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
+                                        .addGap(305, 305, 305)
+                                        .addComponent(jRBFisicaDonante)
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jRBMoralDonante))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
+                                        .addGap(401, 401, 401)
+                                        .addComponent(jLTituloDonatario))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
+                                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(JIntrumentoInformacion)
+                                            .addGroup(PrincipalLayout.createSequentialGroup()
+                                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLInstrumento)
+                                                    .addComponent(jLFolioReal))
+                                                .addGap(12, 12, 12)
+                                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(jTInstrumento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jTFolioReal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jInvalido)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jValido)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(31, 31, 31))
+                    .addGroup(PrincipalLayout.createSequentialGroup()
+                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(PrincipalLayout.createSequentialGroup()
+                                    .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLTomo)
+                                        .addComponent(jLTipoActo)
+                                        .addComponent(jLColonia)
+                                        .addComponent(jLObservaciones))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(PrincipalLayout.createSequentialGroup()
+                                            .addComponent(jTColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLEstadoRepublica)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jCBEstadoRepublica, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLMunicipio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jCBMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(PrincipalLayout.createSequentialGroup()
+                                            .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLFecha2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(PrincipalLayout.createSequentialGroup()
+                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
+                                        .addComponent(jLCalle)
+                                        .addGap(72, 72, 72)
+                                        .addComponent(jTCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLNoExterior)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTNoExterior, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLNoInterior)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTNoInterior, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(5, 5, 5)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PrincipalLayout.setVerticalGroup(
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1157,25 +1197,31 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
                     .addComponent(jTNombreDonanteMoral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLNombreMoralDonante))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSPDonante, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addComponent(jSPDonante, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PrincipalLayout.createSequentialGroup()
-                                .addComponent(jBAgregarDonante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
-                                .addGap(16, 16, 16))
-                            .addComponent(jBEliminarDonante, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLFolioReal)
-                            .addComponent(jTFolioReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addComponent(jBAgregarDonante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(16, 16, 16))
+                    .addComponent(jBEliminarDonante, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLFolioReal)
+                    .addComponent(jTFolioReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PrincipalLayout.createSequentialGroup()
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLInstrumento)
-                            .addComponent(jTInstrumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTInstrumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jInvalido))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JIntrumentoInformacion))
+                    .addComponent(jValido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PrincipalLayout.createSequentialGroup()
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLTomo)
                             .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1185,7 +1231,7 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
                             .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLFecha2)))
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(44, 44, 44)
                         .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1521,6 +1567,76 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
         a.setVisible(true);
     }//GEN-LAST:event_jBCambiarTipoActionPerformed
 
+    private void jTInstrumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInstrumentoFocusLost
+        if(jTInstrumento.getText().isEmpty())
+        {
+            OcultarValidoInvalido();
+        }else
+        {
+            if(ValidacionInstrumento(jTInstrumento.getText())==true || ValidacionInstrumento1(jTInstrumento.getText())==true)
+            {
+                jInvalido.setVisible(true);
+                jValido.setVisible(false);
+                JIntrumentoInformacion.setText("Este No. de instrumento ya esta en el expediente " + NoEx + ".");
+                jBTerminar.setEnabled(false);
+            }
+            else
+            {
+                jInvalido.setVisible(false);
+                jValido.setVisible(true);
+                JIntrumentoInformacion.setText("No. de instrumento disponible.");
+                jBTerminar.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_jTInstrumentoFocusLost
+
+    private boolean ValidacionInstrumento1(String Instrumento)
+    {
+        boolean existe=false; 
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL="SELECT Instrumento FROM donacion WHERE Instrumento='" + Instrumento + "'";
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            if (rs.next()) 
+            {
+               existe=true;
+               NoEx = rs.getInt("IDNoExpediente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al contectar la base de datos" + ex);
+        }finally
+        {
+            mysql.desconectar();
+        }
+        return existe;
+    }
+    private boolean ValidacionInstrumento(String Instrumento)
+    {
+        boolean existe=false; 
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL="SELECT * FROM compraventa WHERE Instrumento='" + Instrumento + "'";
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            if (rs.next()) 
+            {
+               existe=true;
+               NoEx = rs.getInt("IDNoExpediente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al contectar la base de datos" + ex);
+        }finally
+        {
+            mysql.desconectar();
+        }
+        return existe;
+    }
+    
     /**
      * Main de la clase, inicia la ventana.
      * @param args
@@ -1537,6 +1653,7 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JIntrumentoInformacion;
     private javax.swing.JPanel PanelDonante;
     private javax.swing.JPanel PanelDonatario;
     private javax.swing.JPanel Principal;
@@ -1550,6 +1667,7 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JComboBox<String> jCBEstadoRepublica;
     private javax.swing.JComboBox<String> jCBMunicipio;
     private com.toedter.calendar.JDateChooser jDCFecha;
+    private javax.swing.JLabel jInvalido;
     public javax.swing.JLabel jLApMaDonanteFisica;
     public javax.swing.JLabel jLApMaDonatarioFisica;
     public javax.swing.JLabel jLApPaDonanteFisica;
@@ -1601,6 +1719,7 @@ public class Donacion extends javax.swing.JFrame implements ActionListener{
     public static javax.swing.JTextField jTNombreDonatarioMoral;
     public javax.swing.JTextField jTTipoActo;
     public javax.swing.JTextField jTTomo;
+    private javax.swing.JLabel jValido;
     private javax.swing.ButtonGroup tipoPersonaDonante;
     private javax.swing.ButtonGroup tipoPersonaDonatario;
     private javax.swing.JLabel tituloVentanaDonacion;

@@ -505,9 +505,9 @@ public Principal()
         jPEncabezadoLayout.setHorizontalGroup(
             jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPEncabezadoLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(27, 27, 27)
                 .addComponent(Logo)
-                .addGap(43, 43, 43)
+                .addGap(44, 44, 44)
                 .addGroup(jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPEncabezadoLayout.createSequentialGroup()
                         .addComponent(jlIconoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -535,9 +535,11 @@ public Principal()
                                     .addComponent(jTBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPEncabezadoLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addGroup(jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jlIconoBuscar)
-                                    .addComponent(Logo))))
+                                .addComponent(jlIconoBuscar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEncabezadoLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(Logo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPEncabezadoLayout.createSequentialGroup()
@@ -1495,6 +1497,11 @@ public Principal()
 
         jCFiltroTipoExpediente.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jCFiltroTipoExpediente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCFiltroTipoExpediente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCFiltroTipoExpedienteItemStateChanged(evt);
+            }
+        });
         jCFiltroTipoExpediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCFiltroTipoExpedienteActionPerformed(evt);
@@ -2465,8 +2472,160 @@ public Principal()
     }//GEN-LAST:event_jTTiposCompraVentaMouseClicked
 
     private void jCFiltroUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCFiltroUsuarioItemStateChanged
-        
+        if(evt.getStateChange() == ItemEvent.SELECTED)
+        {
+            if (this.jCFiltroUsuario.getSelectedIndex()>0 && this.jCFiltroTipoExpediente.getSelectedIndex()==0) 
+            {           
+                        String usuarioSeleccionado= jCFiltroUsuario.getSelectedItem().toString();
+                        MostrarExpedientesPorUsuario(usuarioSeleccionado);
+            }else if(this.jCFiltroUsuario.getSelectedIndex()>0 && this.jCFiltroTipoExpediente.getSelectedIndex()>0)
+            {
+                        String usuarioSeleccionado= jCFiltroUsuario.getSelectedItem().toString();
+                        String tipoSeleccionado= jCFiltroTipoExpediente.getSelectedItem().toString();
+                        MostrarExpedientesPorUsuarioYExpediente(usuarioSeleccionado, tipoSeleccionado);
+            }else
+            {      
+                        MostrarTodosExpedientes();
+            }
+        }
     }//GEN-LAST:event_jCFiltroUsuarioItemStateChanged
+
+    private void jCFiltroTipoExpedienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCFiltroTipoExpedienteItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED)
+        {
+            if (this.jCFiltroTipoExpediente.getSelectedIndex()>0 && this.jCFiltroUsuario.getSelectedIndex()==0) 
+            {           
+                        String tipoSeleccionado= jCFiltroTipoExpediente.getSelectedItem().toString();
+                        MostrarExpedientesPorTipoExpediente(tipoSeleccionado);
+            }else if(this.jCFiltroUsuario.getSelectedIndex()>0 && this.jCFiltroTipoExpediente.getSelectedIndex()>0)
+            {
+                        String usuarioSeleccionado= jCFiltroUsuario.getSelectedItem().toString();
+                        String tipoSeleccionado= jCFiltroTipoExpediente.getSelectedItem().toString();
+                        MostrarExpedientesPorUsuarioYExpediente(usuarioSeleccionado, tipoSeleccionado);
+            }else
+            {      
+                        MostrarTodosExpedientes();
+            }
+        }
+    }//GEN-LAST:event_jCFiltroTipoExpedienteItemStateChanged
+    private void MostrarExpedientesPorUsuarioYExpediente(String usuario, String expediente)
+    {
+        int contador = 0;
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        DefaultTableModel modeloExpedientes = new DefaultTableModel()
+        {
+            public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        };
+        jTTodosExpedientes.setRowHeight(30);
+        String sSQL="SELECT casoscliente.IDNoExpediente, tipoexpediente.TipoExpediente, bitacora.FechaOrigen, bitacora.ActividadRealizada, usuarios.Nombre, usuarios.ApPaternoUsuario, usuarios.NombreUsuario FROM casoscliente INNER JOIN tipoexpediente ON casoscliente.IDTipoExpediente = tipoexpediente.IDTipoExpediente INNER JOIN bitacora ON casoscliente.IDNoExpediente = bitacora.IDNoExpediente INNER JOIN usuarios ON bitacora.IDUsuario = usuarios.IDUsuario WHERE usuarios.NombreUsuario ='" + usuario + "' AND tipoexpediente.TipoExpediente ='" + expediente + "' ORDER BY casoscliente.IDNoExpediente";
+        modeloExpedientes.setColumnIdentifiers(new Object[]{"ID del Expediente","Tipo de Expediente", "Fecha de creación" ,"Actividad Realizada", "Creado por" });
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()) 
+            {
+                modeloExpedientes.addRow(new Object[]{rs.getInt("IDNoExpediente"), rs.getString("TipoExpediente"), rs.getString("FechaOrigen"), rs.getString("ActividadRealizada"), rs.getString("Nombre").concat(" "+rs.getString("ApPaternoUsuario"))});
+                contador++;
+            }
+            jTTodosExpedientes.setModel(modeloExpedientes);
+            if(contador == 0)
+            {
+                modeloExpedientes.addRow(new Object[]{"No hay coincidencias", " - ", " - ", " - ", " - "});
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener todos los expedientes" + ex);
+        }finally
+        //Cuando se termine todo el proceso cierra la conexión y manda llamar al metodo Inicio.
+        {
+            mysql.desconectar();
+        }
+        jTTodosExpedientes.getColumnModel().getColumn(0).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(1).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(2).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(3).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(4).setResizable(true);
+    }
+    private void MostrarExpedientesPorTipoExpediente(String expediente)
+    {
+        int contador = 0;
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        DefaultTableModel modeloExpedientes = new DefaultTableModel()
+        {
+            public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        };
+        jTTodosExpedientes.setRowHeight(30);
+        String sSQL="SELECT casoscliente.IDNoExpediente, tipoexpediente.TipoExpediente, bitacora.FechaOrigen, bitacora.ActividadRealizada, usuarios.Nombre, usuarios.ApPaternoUsuario FROM casoscliente INNER JOIN tipoexpediente ON casoscliente.IDTipoExpediente = tipoexpediente.IDTipoExpediente INNER JOIN bitacora ON casoscliente.IDNoExpediente = bitacora.IDNoExpediente INNER JOIN usuarios ON bitacora.IDUsuario = usuarios.IDUsuario WHERE tipoexpediente.TipoExpediente ='" + expediente + "' ORDER BY casoscliente.IDNoExpediente";
+        modeloExpedientes.setColumnIdentifiers(new Object[]{"ID del Expediente","Tipo de Expediente", "Fecha de creación" ,"Actividad Realizada", "Creado por" });
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()) 
+            {
+                modeloExpedientes.addRow(new Object[]{rs.getInt("IDNoExpediente"), rs.getString("TipoExpediente"), rs.getString("FechaOrigen"), rs.getString("ActividadRealizada"), rs.getString("Nombre").concat(" "+rs.getString("ApPaternoUsuario"))});
+                contador++;
+            }
+            jTTodosExpedientes.setModel(modeloExpedientes);
+            if(contador == 0)
+            {
+                modeloExpedientes.addRow(new Object[]{"NO hay este tipo de expedientes", " - ", " - ", " - ", " - "});
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener todos los expedientes" + ex);
+        }finally
+        //Cuando se termine todo el proceso cierra la conexión y manda llamar al metodo Inicio.
+        {
+            mysql.desconectar();
+        }
+        jTTodosExpedientes.getColumnModel().getColumn(0).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(1).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(2).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(3).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(4).setResizable(true);
+    }
+    private void MostrarExpedientesPorUsuario(String usuario)
+    {
+        int contador = 0;
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        DefaultTableModel modeloExpedientes = new DefaultTableModel()
+        {
+            public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        };
+        jTTodosExpedientes.setRowHeight(30);
+        String sSQL="SELECT casoscliente.IDNoExpediente, tipoexpediente.TipoExpediente, bitacora.FechaOrigen, bitacora.ActividadRealizada, usuarios.Nombre, usuarios.ApPaternoUsuario, usuarios.NombreUsuario FROM casoscliente INNER JOIN tipoexpediente ON casoscliente.IDTipoExpediente = tipoexpediente.IDTipoExpediente INNER JOIN bitacora ON casoscliente.IDNoExpediente = bitacora.IDNoExpediente INNER JOIN usuarios ON bitacora.IDUsuario = usuarios.IDUsuario WHERE usuarios.NombreUsuario ='" + usuario + "' ORDER BY casoscliente.IDNoExpediente";
+        modeloExpedientes.setColumnIdentifiers(new Object[]{"ID del Expediente","Tipo de Expediente", "Fecha de creación" ,"Actividad Realizada", "Creado por" });
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()) 
+            {
+                modeloExpedientes.addRow(new Object[]{rs.getInt("IDNoExpediente"), rs.getString("TipoExpediente"), rs.getString("FechaOrigen"), rs.getString("ActividadRealizada"), rs.getString("Nombre").concat(" "+rs.getString("ApPaternoUsuario"))});
+                contador++;
+            }
+            jTTodosExpedientes.setModel(modeloExpedientes);
+            if(contador == 0)
+            {
+                modeloExpedientes.addRow(new Object[]{"No hay datos del usuario", " - ", " - ", " - ", " - "});
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener todos los expedientes" + ex);
+        }finally
+        //Cuando se termine todo el proceso cierra la conexión y manda llamar al metodo Inicio.
+        {
+            mysql.desconectar();
+        }
+        jTTodosExpedientes.getColumnModel().getColumn(0).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(1).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(2).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(3).setResizable(true);
+        jTTodosExpedientes.getColumnModel().getColumn(4).setResizable(true);
+    }
+    
     public static void ActualizarListaUsuarios()
     {
         for (int i = 0; i < jTUsuarios.getRowCount(); i++) 

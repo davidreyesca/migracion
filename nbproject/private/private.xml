@@ -20,17 +20,17 @@
             </bookmark>
             <bookmark id="9">
                 <name/>
-                <line>1760</line>
+                <line>1772</line>
                 <key/>
             </bookmark>
             <bookmark id="8">
                 <name/>
-                <line>1760</line>
+                <line>1772</line>
                 <key/>
             </bookmark>
             <bookmark id="4">
                 <name/>
-                <line>1760</line>
+                <line>1772</line>
                 <key/>
             </bookmark>
         </file>
@@ -51,6 +51,14 @@
             </bookmark>
         </file>
         <file>
+            <url>src/Vista/CompraVenta.java</url>
+            <bookmark id="11">
+                <name/>
+                <line>445</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
             <url>src/Vista/CapturaCompraVenta.java</url>
             <bookmark id="3">
                 <name/>
@@ -60,14 +68,6 @@
             <bookmark id="2">
                 <name/>
                 <line>1425</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/Vista/CompraVenta.java</url>
-            <bookmark id="11">
-                <name/>
-                <line>445</line>
                 <key/>
             </bookmark>
         </file>

@@ -221,6 +221,26 @@
                                       <Component id="jCBTipoCompraVenta" min="-2" pref="320" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jButton1" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="JIntrumentoInformacion" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLInstrumento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLFolioReal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jTInstrumento" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jTFolioReal" alignment="0" min="-2" pref="388" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jInvalido" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jValido" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -230,8 +250,6 @@
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLInstrumento" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLFolioReal" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLTomo" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLTipoActo" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLColonia" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -254,8 +272,6 @@
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                       <Component id="jTTipoActo" alignment="0" min="-2" pref="388" max="-2" attributes="0"/>
                                                       <Component id="jTTomo" alignment="0" min="-2" pref="388" max="-2" attributes="0"/>
-                                                      <Component id="jTInstrumento" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jTFolioReal" alignment="0" min="-2" pref="388" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jLFecha2" min="-2" max="-2" attributes="0"/>
@@ -359,7 +375,7 @@
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jBAgregarVendedor" pref="31" max="32767" attributes="0"/>
+                              <Component id="jBAgregarVendedor" pref="33" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jBEliminarVendedor" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
@@ -371,8 +387,8 @@
                           <Component id="jCBTipoCompraVenta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLFolioReal" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTFolioReal" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -381,8 +397,16 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLInstrumento" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTInstrumento" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jInvalido" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jValido" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="JIntrumentoInformacion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLTomo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTTomo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -395,7 +419,7 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Component id="jDCFecha" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -888,6 +912,7 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTInstrumentoFocusLost"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTInstrumentoActionPerformed"/>
               </Events>
               <AuxValues>
@@ -1237,6 +1262,28 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jInvalido">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Vista/Imagenes/ocupado.png"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jValido">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Vista/Imagenes/validacion.png"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="JIntrumentoInformacion">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Leelawadee" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="El campo instrumento no puede ir vacio."/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

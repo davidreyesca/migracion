@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -34,6 +33,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class CompraVenta extends javax.swing.JFrame implements ActionListener{
     private int indiceComprador;
     private int indiceVendedor;
+    int NoEx;
     private Map controlCompradores = new HashMap();
     private Map controlVendedores = new HashMap();
     DefaultComboBoxModel modeloEstado, modeloMunicipio;
@@ -516,6 +516,14 @@ public void llenar_combo()
     /**
      * Constructor de la clase
      */
+    public void OcultarValidoInvalido()
+    {
+        jBTerminar.setEnabled(false);
+        jInvalido.setVisible(true);
+        jValido.setVisible(false);
+        JIntrumentoInformacion.setText("El campo instrumento no puede ir vacio.");
+    }
+    
     public CompraVenta() 
     {
         //JFrame iniciando compnente, en el centro de la pantalla, sin reescalado
@@ -529,6 +537,7 @@ public void llenar_combo()
         });
         setIconImage(new ImageIcon(getClass().getResource("Imagenes/IconoNotaria.png")).getImage());
         setExtendedState(MAXIMIZED_BOTH);
+        OcultarValidoInvalido();
         tituloVentanaCompraVenta.setText("No. Expediente: #" + BDdocumentos.getNoExpediente());
         OcultarPanenlesIniciales();
         cargarEstados();
@@ -610,6 +619,9 @@ public void llenar_combo()
         jBCambiarTipo = new javax.swing.JButton();
         jLTipoCompraVenta = new javax.swing.JLabel();
         jCBTipoCompraVenta = new javax.swing.JComboBox<>();
+        jInvalido = new javax.swing.JLabel();
+        jValido = new javax.swing.JLabel();
+        JIntrumentoInformacion = new javax.swing.JLabel();
         jPPDF = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -873,6 +885,11 @@ public void llenar_combo()
 
         jTInstrumento.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTInstrumento.setPreferredSize(new java.awt.Dimension(250, 26));
+        jTInstrumento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTInstrumentoFocusLost(evt);
+            }
+        });
         jTInstrumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTInstrumentoActionPerformed(evt);
@@ -1023,6 +1040,13 @@ public void llenar_combo()
             }
         });
 
+        jInvalido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ocupado.png"))); // NOI18N
+
+        jValido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/validacion.png"))); // NOI18N
+
+        JIntrumentoInformacion.setFont(new java.awt.Font("Leelawadee", 0, 14)); // NOI18N
+        JIntrumentoInformacion.setText("El campo instrumento no puede ir vacio.");
+
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
         PrincipalLayout.setHorizontalGroup(
@@ -1124,7 +1148,22 @@ public void llenar_combo()
                             .addGroup(PrincipalLayout.createSequentialGroup()
                                 .addGap(193, 193, 193)
                                 .addComponent(jCBTipoCompraVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PrincipalLayout.createSequentialGroup()
+                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(JIntrumentoInformacion)
+                                    .addGroup(PrincipalLayout.createSequentialGroup()
+                                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLInstrumento)
+                                            .addComponent(jLFolioReal))
+                                        .addGap(12, 12, 12)
+                                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTInstrumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTFolioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jInvalido)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jValido)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PrincipalLayout.createSequentialGroup()
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1132,8 +1171,6 @@ public void llenar_combo()
                             .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PrincipalLayout.createSequentialGroup()
                                     .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLInstrumento)
-                                        .addComponent(jLFolioReal)
                                         .addComponent(jLTomo)
                                         .addComponent(jLTipoActo)
                                         .addComponent(jLColonia)
@@ -1153,9 +1190,7 @@ public void llenar_combo()
                                         .addGroup(PrincipalLayout.createSequentialGroup()
                                             .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTInstrumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jTFolioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jLFecha2)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1237,7 +1272,7 @@ public void llenar_combo()
                 .addGap(10, 10, 10)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addComponent(jBAgregarVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(jBAgregarVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, Short.MAX_VALUE)
                         .addGap(16, 16, 16))
                     .addComponent(jBEliminarVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1246,7 +1281,7 @@ public void llenar_combo()
                     .addComponent(jLTipoCompraVenta)
                     .addComponent(jCBTipoCompraVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLFolioReal)
@@ -1254,8 +1289,14 @@ public void llenar_combo()
                         .addGap(18, 18, 18)
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLInstrumento)
-                            .addComponent(jTInstrumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTInstrumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jInvalido)))
+                    .addComponent(jValido))
+                .addGap(10, 10, 10)
+                .addComponent(JIntrumentoInformacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PrincipalLayout.createSequentialGroup()
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLTomo)
                             .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1265,7 +1306,7 @@ public void llenar_combo()
                             .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLFecha2)))
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
+                        .addGap(41, 41, 41)
                         .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1539,7 +1580,7 @@ public void llenar_combo()
     }//GEN-LAST:event_jBTerminarActionPerformed
 
     private void jCBEstadoRepublicaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBEstadoRepublicaItemStateChanged
-        if(evt.getStateChange() ==ItemEvent.SELECTED)
+        if(evt.getStateChange() == ItemEvent.SELECTED)
         {
             if (this.jCBEstadoRepublica.getSelectedIndex()>0) 
             {           
@@ -1607,6 +1648,75 @@ public void llenar_combo()
 
     }//GEN-LAST:event_jCBTipoCompraVentaItemStateChanged
 
+    private void jTInstrumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInstrumentoFocusLost
+        if(jTInstrumento.getText().isEmpty())
+        {
+            OcultarValidoInvalido();
+        }else
+        {
+            if(ValidacionInstrumento(jTInstrumento.getText())==true || ValidacionInstrumento1(jTInstrumento.getText())==true)
+            {
+                jInvalido.setVisible(true);
+                jValido.setVisible(false);
+                JIntrumentoInformacion.setText("Este No. de instrumento ya esta en el expediente " + NoEx + ".");
+                jBTerminar.setEnabled(false);
+            }
+            else
+            {
+                jInvalido.setVisible(false);
+                jValido.setVisible(true);
+                JIntrumentoInformacion.setText("No. de instrumento disponible.");
+                jBTerminar.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_jTInstrumentoFocusLost
+
+    private boolean ValidacionInstrumento1(String Instrumento)
+    {
+        boolean existe=false; 
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL="SELECT Instrumento FROM donacion WHERE Instrumento='" + Instrumento + "'";
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            if (rs.next()) 
+            {
+               existe=true;
+               NoEx = rs.getInt("IDNoExpediente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al contectar la base de datos" + ex);
+        }finally
+        {
+            mysql.desconectar();
+        }
+        return existe;
+    }
+    private boolean ValidacionInstrumento(String Instrumento)
+    {
+        boolean existe=false; 
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL="SELECT * FROM compraventa WHERE Instrumento='" + Instrumento + "'";
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            if (rs.next()) 
+            {
+               existe=true;
+               NoEx = rs.getInt("IDNoExpediente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al contectar la base de datos" + ex);
+        }finally
+        {
+            mysql.desconectar();
+        }
+        return existe;
+    }
     /**
      * Main de la clase, inicia la ventana.
      * @param args
@@ -1623,6 +1733,7 @@ public void llenar_combo()
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JIntrumentoInformacion;
     private javax.swing.JPanel PanelComprador;
     private javax.swing.JPanel PanelVendedor;
     private javax.swing.JPanel Principal;
@@ -1637,6 +1748,7 @@ public void llenar_combo()
     private javax.swing.JComboBox<String> jCBMunicipio;
     private javax.swing.JComboBox<String> jCBTipoCompraVenta;
     private com.toedter.calendar.JDateChooser jDCFecha;
+    private javax.swing.JLabel jInvalido;
     public javax.swing.JLabel jLApMaCompradorFisica;
     public javax.swing.JLabel jLApMaVendedorFisica;
     public javax.swing.JLabel jLApPaCompradorFisica;
@@ -1689,6 +1801,7 @@ public void llenar_combo()
     public static javax.swing.JTextField jTNombreVendedorMoral;
     public javax.swing.JTextField jTTipoActo;
     public javax.swing.JTextField jTTomo;
+    private javax.swing.JLabel jValido;
     private javax.swing.ButtonGroup tipoPersonaComprador;
     private javax.swing.ButtonGroup tipoPersonaVendedor;
     private javax.swing.JLabel tituloVentanaCompraVenta;
