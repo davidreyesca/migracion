@@ -84,14 +84,18 @@ public class VistaPrevia extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        jBSiguiente.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
         jBSiguiente.setText("Siguiente");
+        jBSiguiente.setContentAreaFilled(false);
         jBSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSiguienteActionPerformed(evt);
             }
         });
 
+        jBAnterior.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
         jBAnterior.setText("Anterior");
+        jBAnterior.setContentAreaFilled(false);
         jBAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAnteriorActionPerformed(evt);
@@ -113,23 +117,24 @@ public class VistaPrevia extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPDFOpcionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
                 .addComponent(jBAnterior)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBSiguiente)
-                .addGap(234, 234, 234))
+                .addGap(207, 207, 207))
         );
         jPPDFOpcionesLayout.setVerticalGroup(
             jPPDFOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPPDFOpcionesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPPDFOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBAnterior)
-                    .addComponent(jBSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(jPPDFOpcionesLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jBAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPPDFOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPPDFOpcionesLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jBAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPPDFOpcionesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPPDFOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBAnterior))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -147,6 +152,7 @@ public class VistaPrevia extends javax.swing.JPanel {
         jPDirectorio.setBackground(new java.awt.Color(255, 255, 255));
         jPDirectorio.setPreferredSize(new java.awt.Dimension(200, 790));
 
+        jTDirecciones.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jTDirecciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -158,6 +164,7 @@ public class VistaPrevia extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTDirecciones.setSelectionBackground(new java.awt.Color(41, 168, 73));
         jTDirecciones.setShowVerticalLines(false);
         jTDirecciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -168,11 +175,13 @@ public class VistaPrevia extends javax.swing.JPanel {
 
         jLIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/files.png"))); // NOI18N
 
-        jLNombreCarpeta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLNombreCarpeta.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
         jLNombreCarpeta.setText("24-24");
 
+        jLTitulo.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jLTitulo.setText("Archivos del Exp:");
 
+        jBVerPDF.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jBVerPDF.setText("Ver archivos");
         jBVerPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +189,7 @@ public class VistaPrevia extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jButton1.setText("Eliminar un archivo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +197,7 @@ public class VistaPrevia extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jButton2.setText("Agregar un archivo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

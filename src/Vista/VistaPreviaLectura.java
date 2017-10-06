@@ -83,7 +83,7 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
         jBVerPDF = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        jBSiguiente.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBSiguiente.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
         jBSiguiente.setText("Siguiente");
         jBSiguiente.setContentAreaFilled(false);
         jBSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +92,7 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
             }
         });
 
-        jBAnterior.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBAnterior.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
         jBAnterior.setText("Anterior");
         jBAnterior.setContentAreaFilled(false);
         jBAnterior.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +116,7 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPDFOpcionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBAbrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
                 .addComponent(jBAnterior)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBSiguiente)
@@ -150,6 +150,7 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
 
         jPDirectorio.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTDirecciones.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jTDirecciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -161,6 +162,7 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTDirecciones.setSelectionBackground(new java.awt.Color(41, 168, 73));
         jTDirecciones.setShowVerticalLines(false);
         jTDirecciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -174,8 +176,10 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
         jLNombreCarpeta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLNombreCarpeta.setText("24-24");
 
+        jLTitulo.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jLTitulo.setText("Archivos del Expediente:");
 
+        jBVerPDF.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jBVerPDF.setText("Eliminar un archivo");
         jBVerPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,6 +187,7 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Leelawadee", 0, 16)); // NOI18N
         jButton1.setText("Agregar otro archivo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,7 +246,7 @@ public class VistaPreviaLectura extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPPDFOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelpdf, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)))
+                    .addComponent(panelpdf, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)))
         );
         jPContenidoLayout.setVerticalGroup(
             jPContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -185,7 +185,7 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
 
         jPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
-        Vista.setBackground(new java.awt.Color(49, 58, 115));
+        Vista.setBackground(new java.awt.Color(52, 82, 142));
 
         javax.swing.GroupLayout VistaLayout = new javax.swing.GroupLayout(Vista);
         Vista.setLayout(VistaLayout);
@@ -262,6 +262,7 @@ public final class IndexarDocumentos extends javax.swing.JFrame implements Runna
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTDirecciones.setSelectionBackground(new java.awt.Color(41, 168, 73));
         jScrollPane1.setViewportView(jTDirecciones);
 
         jLabel5.setText("Selecciona los archivos a indexar.");

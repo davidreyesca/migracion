@@ -29,11 +29,11 @@ public class EleccionTipoExpediente extends javax.swing.JFrame {
         }
     }
     public EleccionTipoExpediente() 
-    {
+    { 
+        initComponents();
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
         setResizable(false);
-        initComponents();
         setIconImage(new ImageIcon(getClass().getResource("Imagenes/IconoNotaria.png")).getImage());
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -49,7 +49,6 @@ public class EleccionTipoExpediente extends javax.swing.JFrame {
 
         jPrincipal = new javax.swing.JPanel();
         Vista = new javax.swing.JPanel();
-        Vista1 = new javax.swing.JPanel();
         jPOpciones = new javax.swing.JPanel();
         CompraVenta = new javax.swing.JButton();
         CancelacionHipoteca = new javax.swing.JButton();
@@ -67,30 +66,17 @@ public class EleccionTipoExpediente extends javax.swing.JFrame {
 
         jPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
-        Vista.setBackground(new java.awt.Color(49, 58, 115));
+        Vista.setBackground(new java.awt.Color(52, 82, 142));
 
         javax.swing.GroupLayout VistaLayout = new javax.swing.GroupLayout(Vista);
         Vista.setLayout(VistaLayout);
         VistaLayout.setHorizontalGroup(
             VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 15, Short.MAX_VALUE)
         );
         VistaLayout.setVerticalGroup(
             VistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        Vista1.setBackground(new java.awt.Color(40, 168, 72));
-
-        javax.swing.GroupLayout Vista1Layout = new javax.swing.GroupLayout(Vista1);
-        Vista1.setLayout(Vista1Layout);
-        Vista1Layout.setHorizontalGroup(
-            Vista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-        Vista1Layout.setVerticalGroup(
-            Vista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
         );
 
         jPOpciones.setBackground(new java.awt.Color(255, 255, 255));
@@ -240,18 +226,14 @@ public class EleccionTipoExpediente extends javax.swing.JFrame {
         jPrincipalLayout.setHorizontalGroup(
             jPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPrincipalLayout.createSequentialGroup()
-                .addGroup(jPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Vista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Vista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Vista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addComponent(jPOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPrincipalLayout.setVerticalGroup(
             jPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPrincipalLayout.createSequentialGroup()
-                .addComponent(Vista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(Vista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Vista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -410,7 +392,6 @@ public class EleccionTipoExpediente extends javax.swing.JFrame {
     private javax.swing.JButton Poderes;
     private javax.swing.JButton Testamentos;
     private javax.swing.JPanel Vista;
-    private javax.swing.JPanel Vista1;
     public static javax.swing.JLabel jLNoExpediente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPOpciones;

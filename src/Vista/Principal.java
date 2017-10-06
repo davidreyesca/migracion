@@ -420,6 +420,7 @@ public Principal()
         jLabel15 = new javax.swing.JLabel();
         jCFiltroUsuario = new javax.swing.JComboBox<>();
         jCFiltroTipoExpediente = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPMiPerfil = new javax.swing.JPanel();
         jLTituloPerfil = new javax.swing.JLabel();
         jPCambioContraseña = new javax.swing.JPanel();
@@ -1532,6 +1533,17 @@ public Principal()
                 .addContainerGap())
         );
 
+        jButton1.setFont(new java.awt.Font("Leelawadee", 1, 16)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(7, 71, 166));
+        jButton1.setText("Verificar consecutivos");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPVerExpedientesLayout = new javax.swing.GroupLayout(jPVerExpedientes);
         jPVerExpedientes.setLayout(jPVerExpedientesLayout);
         jPVerExpedientesLayout.setHorizontalGroup(
@@ -1556,6 +1568,8 @@ public Principal()
                     .addGroup(jPVerExpedientesLayout.createSequentialGroup()
                         .addComponent(jBRegresarDeVerExpedientes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1564,8 +1578,10 @@ public Principal()
             .addGroup(jPVerExpedientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPVerExpedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBRegresarDeVerExpedientes)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPVerExpedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
+                        .addComponent(jBRegresarDeVerExpedientes)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLInstruccionesTodosExpedientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2508,6 +2524,11 @@ public Principal()
             }
         }
     }//GEN-LAST:event_jCFiltroTipoExpedienteItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Consecutivos a = new Consecutivos();
+        a.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void MostrarExpedientesPorUsuarioYExpediente(String usuario, String expediente)
     {
         int contador = 0;
@@ -2696,6 +2717,7 @@ public Principal()
     private javax.swing.JButton jBRegresarDeVerExpedientes1;
     private javax.swing.JButton jBVerExpedientes;
     private javax.swing.JButton jBuscar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;

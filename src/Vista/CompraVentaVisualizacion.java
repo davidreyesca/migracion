@@ -34,6 +34,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class CompraVentaVisualizacion extends javax.swing.JFrame implements ActionListener{
     private int indiceComprador;
     private int indiceVendedor;
+    int NoEx;
     private Map controlCompradores = new HashMap();
     private Map controlVendedores = new HashMap();
     DefaultComboBoxModel modeloEstado, modeloMunicipio;
@@ -574,6 +575,7 @@ public void llenar_combo()
         setExtendedState(MAXIMIZED_BOTH);
         tituloVentanaCompraVenta.setText("No. Expediente: #" + AbrirExpediente.getNoExpedinte());
         OcultarPanenlesIniciales();
+        OcultarIntrumento();
         cargarEstados();
         llenar_combo();
         ValidacionLetrasNumerosTiempoReal();
@@ -653,6 +655,9 @@ public void llenar_combo()
         jLTipoCompraVenta = new javax.swing.JLabel();
         jCBTipoCompraVenta = new javax.swing.JComboBox<>();
         jBHabilitarEdicion = new javax.swing.JButton();
+        JIntrumentoInformacion = new javax.swing.JLabel();
+        jInvalido = new javax.swing.JLabel();
+        jValido = new javax.swing.JLabel();
         jPPDF = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -916,6 +921,11 @@ public void llenar_combo()
 
         jTInstrumento.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTInstrumento.setPreferredSize(new java.awt.Dimension(250, 26));
+        jTInstrumento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTInstrumentoFocusLost(evt);
+            }
+        });
         jTInstrumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTInstrumentoActionPerformed(evt);
@@ -1066,6 +1076,14 @@ public void llenar_combo()
             }
         });
 
+        JIntrumentoInformacion.setFont(new java.awt.Font("Leelawadee", 0, 14)); // NOI18N
+        JIntrumentoInformacion.setText("Campo instrumento correcto.");
+
+        jInvalido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/ocupado.png"))); // NOI18N
+
+        jValido.setFont(new java.awt.Font("Leelawadee", 0, 14)); // NOI18N
+        jValido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/validacion.png"))); // NOI18N
+
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
         PrincipalLayout.setHorizontalGroup(
@@ -1196,18 +1214,26 @@ public void llenar_combo()
                                             .addComponent(jLMunicipio)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jCBMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(PrincipalLayout.createSequentialGroup()
-                                            .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTInstrumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jTFolioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jCBTipoCompraVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(JIntrumentoInformacion)
+                                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTInstrumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jTFolioReal, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jCBTipoCompraVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLFecha2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(PrincipalLayout.createSequentialGroup()
+                                                    .addComponent(jLFecha2)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(PrincipalLayout.createSequentialGroup()
+                                                    .addComponent(jInvalido)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jValido))))))
                                 .addGroup(PrincipalLayout.createSequentialGroup()
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1277,7 +1303,7 @@ public void llenar_combo()
                 .addGap(10, 10, 10)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addComponent(jBAgregarVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(jBAgregarVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, Short.MAX_VALUE)
                         .addGap(16, 16, 16))
                     .addComponent(jBEliminarVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1286,53 +1312,59 @@ public void llenar_combo()
                     .addComponent(jLTipoCompraVenta)
                     .addComponent(jCBTipoCompraVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLFolioReal)
+                    .addComponent(jTFolioReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLFolioReal)
-                            .addComponent(jTFolioReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLInstrumento)
-                            .addComponent(jTInstrumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTInstrumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jInvalido))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JIntrumentoInformacion)
+                        .addGap(18, 18, 18)
+                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PrincipalLayout.createSequentialGroup()
+                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLTomo)
+                                    .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLTipoActo)
+                                    .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLFecha2)))
+                            .addGroup(PrincipalLayout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLTomo)
-                            .addComponent(jTTomo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLTipoActo)
-                            .addComponent(jTTipoActo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLFecha2)))
-                    .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCalle)
-                    .addComponent(jTCalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLNoInterior)
-                    .addComponent(jTNoInterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLNoExterior)
-                    .addComponent(jTNoExterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTColonia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLColonia)
-                        .addComponent(jCBEstadoRepublica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLMunicipio)
-                        .addComponent(jCBMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLEstadoRepublica)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLObservaciones)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jLCalle)
+                            .addComponent(jTCalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLNoInterior)
+                            .addComponent(jTNoInterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLNoExterior)
+                            .addComponent(jTNoExterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTColonia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLColonia)
+                                .addComponent(jCBEstadoRepublica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLMunicipio)
+                                .addComponent(jCBMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLEstadoRepublica)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLObservaciones)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBHabilitarEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jValido))
                 .addContainerGap())
         );
 
@@ -1658,6 +1690,116 @@ public void llenar_combo()
         }       
     }//GEN-LAST:event_jBHabilitarEdicionActionPerformed
 
+    private void jTInstrumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInstrumentoFocusLost
+        if(jTInstrumento.getText().isEmpty())
+        {
+            jValido.setVisible(false);
+            jInvalido.setVisible(true);
+            JIntrumentoInformacion.setText("El campo instrumento es obligatorio.");
+            jBTerminar.setEnabled(false);
+        }else
+        {
+            if(ValidarInstrumentoPropio(jTInstrumento.getText())== true)
+            {
+                jValido.setVisible(true);
+                jInvalido.setVisible(false);
+                JIntrumentoInformacion.setText("Campo instrumento correcto.");
+                jBTerminar.setEnabled(true);
+            }
+            else
+            {
+                if(ValidacionInstrumento(jTInstrumento.getText())==true || ValidacionInstrumento1(jTInstrumento.getText())==true)
+                {
+                    jInvalido.setVisible(true);
+                    jValido.setVisible(false);
+                    JIntrumentoInformacion.setText("Este No. de instrumento ya esta en el expediente " + NoEx + ".");
+                    jBTerminar.setEnabled(false);
+                }
+                else
+                {
+                    jInvalido.setVisible(false);
+                    jValido.setVisible(true);
+                    JIntrumentoInformacion.setText("No. de instrumento disponible y correcto.");
+                    jBTerminar.setEnabled(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_jTInstrumentoFocusLost
+    public void OcultarIntrumento()
+    {
+        jValido.setVisible(true);
+        jInvalido.setVisible(false);
+        JIntrumentoInformacion.setText("Campo instrumento correcto.");
+        jBTerminar.setEnabled(true);
+    }
+    private boolean ValidacionInstrumento1(String Instrumento)
+    {
+        boolean existe = false; 
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL="SELECT IDNoExpediente, Instrumento FROM donacion WHERE Instrumento='" + Instrumento + "'";
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            if (rs.next()) 
+            {
+               existe=true;
+               NoEx = rs.getInt("IDNoExpediente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al contectar la base de datos" + ex);
+        }finally
+        {
+            mysql.desconectar();
+        }
+        return existe;
+    }
+    private boolean ValidacionInstrumento(String Instrumento)
+    {
+        boolean existe=false; 
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL="SELECT IDNoExpediente, Instrumento FROM compraventa WHERE Instrumento='" + Instrumento + "'";
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            if (rs.next()) 
+            {
+               existe=true;
+               NoEx = rs.getInt("IDNoExpediente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al contectar la base de datos" + ex);
+        }finally
+        {
+            mysql.desconectar();
+        }
+        return existe;
+    }
+    public boolean ValidarInstrumentoPropio(String Instrumento)
+    {
+        boolean validado = false;
+        ConexionMySql mysql = new ConexionMySql();
+        Connection cn = mysql.getConection();
+        String sSQL="SELECT Instrumento, IDNoExpediente FROM compraventa WHERE Instrumento='" + Instrumento + "' AND IDNoExpediente='" + AbrirExpediente.getNoExpedinte() + "'";
+        try 
+        {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            if (rs.next()) 
+            {
+               validado = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al contectar la base de datos" + ex);
+        }finally
+        {
+            mysql.desconectar();
+        }
+        return validado;
+    }
     /**
      * Main de la clase, inicia la ventana.
      * @param args
@@ -1674,6 +1816,7 @@ public void llenar_combo()
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JIntrumentoInformacion;
     public javax.swing.JPanel PanelComprador;
     public static javax.swing.JPanel PanelVendedor;
     private javax.swing.JPanel Principal;
@@ -1688,6 +1831,7 @@ public void llenar_combo()
     public javax.swing.JComboBox<String> jCBMunicipio;
     public javax.swing.JComboBox<String> jCBTipoCompraVenta;
     public com.toedter.calendar.JDateChooser jDCFecha;
+    private javax.swing.JLabel jInvalido;
     public javax.swing.JLabel jLApMaCompradorFisica;
     public javax.swing.JLabel jLApMaVendedorFisica;
     public javax.swing.JLabel jLApPaCompradorFisica;
@@ -1740,6 +1884,7 @@ public void llenar_combo()
     public static javax.swing.JTextField jTNombreVendedorMoral;
     public javax.swing.JTextField jTTipoActo;
     public javax.swing.JTextField jTTomo;
+    private javax.swing.JLabel jValido;
     private javax.swing.ButtonGroup tipoPersonaComprador;
     private javax.swing.ButtonGroup tipoPersonaVendedor;
     public static javax.swing.JLabel tituloVentanaCompraVenta;

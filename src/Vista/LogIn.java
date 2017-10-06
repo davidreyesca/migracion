@@ -148,7 +148,7 @@ public class LogIn extends javax.swing.JFrame {
         jLOlvidarPassword2.setForeground(new java.awt.Color(51, 51, 51));
         jLOlvidarPassword2.setText("Contraseña:");
 
-        jPanel2.setBackground(new java.awt.Color(18, 71, 143));
+        jPanel2.setBackground(new java.awt.Color(52, 82, 142));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

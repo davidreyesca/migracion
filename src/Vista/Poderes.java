@@ -411,7 +411,7 @@ public class Poderes extends javax.swing.JFrame implements ActionListener{
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Poderes Captura");
 
-        jPanel2.setBackground(new java.awt.Color(49, 58, 115));
+        jPanel2.setBackground(new java.awt.Color(52, 82, 142));
         jPanel2.setAlignmentX(0.0F);
         jPanel2.setAlignmentY(0.0F);
 
